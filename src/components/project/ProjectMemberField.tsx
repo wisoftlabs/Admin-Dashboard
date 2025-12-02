@@ -96,17 +96,17 @@ export function ProjectMemberField<T extends ProjectFormData>({ control }: Proje
 
                 return (
                   <TableRow key={field.id}>
-                    <TableCell className="py-1 px-2">{member.name}</TableCell>
-                    <TableCell className="py-1 px-2">{member.extra}</TableCell>
-                    <TableCell className="py-1 px-2">
+                    <TableCell className="py-0.5 px-2">{member.name}</TableCell>
+                    <TableCell className="py-0.5 px-2">{member.extra}</TableCell>
+                    <TableCell className="py-0.5 px-2">
                       <Button
                         type="button"
                         variant="ghost"
                         size="icon"
                         onClick={() => remove(index)}
-                        className="h-6 w-6"
+                        className="size-6"
                       >
-                        <X className="h-3 w-3" />
+                        <X className="size-3 text-destructive" />
                       </Button>
                     </TableCell>
                   </TableRow>
