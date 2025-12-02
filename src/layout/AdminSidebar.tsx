@@ -12,9 +12,10 @@ import {
   Home,
   Newspaper,
 } from "lucide-react";
-import { Link, useLocation } from "react-router";
-import {SidebarUser} from "@/layout/SidebarUser";
+import { useNavigate, useLocation } from "react-router";
+import {SidebarUser} from "@/components/sidebar/SidebarUser";
 import * as React from "react";
+import {Button} from "@/components/ui/button";
 
 const sidebarNavItems = [
   {
@@ -45,6 +46,7 @@ const sidebarNavItems = [
 ];
 
 export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   return (
@@ -60,10 +62,10 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
             {sidebarNavItems.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild size="lg" isActive={pathname === item.href}>
-                  <Link to={item.href}>
+                  <Button className="[&_svg]:size-5!" onClick={() => navigate(item.href)} variant="ghost">
                     {item.icon}
                     <span className="text-lg font-bold">{item.title}</span>
-                  </Link>
+                  </Button>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}

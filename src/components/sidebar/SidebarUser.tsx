@@ -30,9 +30,7 @@ export function SidebarUser() {
         <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
           관리자
         </p>
-        <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-          <LoginTimer />
-        </p>
+        <LoginTimer />
       </div>
       <div className="ml-auto flex items-center space-x-1">
         <Tooltip>
