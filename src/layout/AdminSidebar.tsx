@@ -16,6 +16,7 @@ import { useNavigate, useLocation } from "react-router";
 import {SidebarUser} from "@/components/sidebar/SidebarUser";
 import * as React from "react";
 import {Button} from "@/components/ui/button";
+import {cn} from "@/lib/utils";
 
 const sidebarNavItems = [
   {
@@ -61,10 +62,13 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
           <SidebarMenu>
             {sidebarNavItems.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild size="lg" isActive={pathname === item.href}>
-                  <Button className="[&_svg]:size-5!" onClick={() => navigate(item.href)} variant="ghost">
+                <SidebarMenuButton className="[&>svg]:size-5 [&>svg]:text-muted-foreground data-[active=true]:[&>svg]:text-foreground justify-start" size="lg" isActive={pathname === item.href} asChild>
+                  <Button className="gap-4" onClick={() => navigate(item.href)} variant="ghost">
                     {item.icon}
-                    <span className="text-lg font-bold">{item.title}</span>
+                    <span className={cn(
+                      "text-lg",
+                      pathname === item.href ? "font-extrabold text-foreground" : "font-semibold text-muted-foreground"
+                    )}>{item.title}</span>
                   </Button>
                 </SidebarMenuButton>
               </SidebarMenuItem>
