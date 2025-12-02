@@ -125,4 +125,10 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  @media (min-width: 2200px) {
+    html {
+      font-size: 22px;
+    }
+  }
 }
