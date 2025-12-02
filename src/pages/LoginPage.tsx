@@ -26,7 +26,7 @@ export function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle>WISOFT Admin</CardTitle>
+          <CardTitle className="font-extrabold text-2xl">WISOFT</CardTitle>
           <CardDescription>로그인하여 관리자 페이지에 접속하세요</CardDescription>
         </CardHeader>
         <CardContent>
@@ -39,7 +39,7 @@ export function LoginPage() {
                   <FormItem>
                     <FormLabel>아이디</FormLabel>
                     <FormControl>
-                      <Input placeholder="아이디를 입력하세요" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -52,7 +52,7 @@ export function LoginPage() {
                   <FormItem>
                     <FormLabel>비밀번호</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="비밀번호를 입력하세요" {...field} />
+                      <Input type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
