@@ -5,7 +5,8 @@
     Shadcn UI, 
     Tanstack Query, 
     Zustand, 
-    React Router
+    React Router (not react-router-dom)
+    lucide-react
 
 ## 1. Naming Conventions (Strict)
 - **React Components:** PascalCase (e.g., `ProjectList.tsx`, `AdminLayout.tsx`)
@@ -52,6 +53,8 @@
     - `components/*`: Pure presentation.
     - `hooks/*`: Business logic, Data fetching, Form submission handlers.
 - **React 19 Usage:** Utilize React Compiler optimizations. Use `use` API if needed.
+- **Icons**: use icon from `lucide-react` is already installed.
+- React Component Definition(ex. export function ComponentName() {})
 
 ## 4. Data Fetching (Tanstack Query)
 - **Location:** Query logic must reside in `src/hooks/<domain>/`.
