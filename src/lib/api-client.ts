@@ -33,6 +33,8 @@ export async function apiClient<T>(
     body: isFormData ? (body as FormData) : (body ? JSON.stringify(body) : undefined),
   });
 
+  console.log("[API Client] Response", response.status);
+
   if (response.status === 401) throw new Error("Unauthorized");
 
   if (!response.ok) {
