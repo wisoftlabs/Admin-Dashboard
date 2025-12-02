@@ -122,5 +122,42 @@
       "thumbnail": "https://picsum.photos/seed/7/400/300",
       "year": 2023
     }
+  ],
+  "awards": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "year": 2023,
+      "image_url": "https://picsum.photos/seed/award1/800/600",
+      "image_type": "jpg",
+      "orientation": "landscape"
+    },
+    {
+      "id": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
+      "year": 2023,
+      "image_url": "https://picsum.photos/seed/award2/600/800",
+      "image_type": "jpg",
+      "orientation": "portrait"
+    },
+    {
+      "id": "c3d4e5f6-a7b8-9012-3456-7890abcdef12",
+      "year": 2024,
+      "image_url": "https://picsum.photos/seed/award3/800/600",
+      "image_type": "jpg",
+      "orientation": "landscape"
+    },
+    {
+      "id": "d4e5f6a7-b8c9-0123-4567-890abcdef123",
+      "year": 2024,
+      "image_url": "https://picsum.photos/seed/award4/600/800",
+      "image_type": "jpg",
+      "orientation": "portrait"
+    },
+    {
+      "id": "e5f6a7b8-c9d0-1234-5678-90abcdef1234",
+      "year": 2025,
+      "image_url": "https://picsum.photos/seed/award5/800/600",
+      "image_type": "jpg",
+      "orientation": "landscape"
+    }
   ]
 }

@@ -14,15 +14,15 @@ export async function apiClient<T>(
 
   const headers: HeadersInit = {};
 
-  // 토큰 주입 로직
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
   const isFormData = body instanceof FormData;
 
-  // FormData가 아닐 때만 JSON 헤더 설정
-  // (FormData는 브라우저가 자동으로 Content-Type과 boundary를 설정함)
+  if (isFormData) console.log("[API Client] Request", Object.fromEntries(body));
+  else console.log("[API Client] Request", body);
+
   if (!isFormData && body) {
     headers["Content-Type"] = "application/json";
   }

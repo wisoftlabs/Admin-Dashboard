@@ -41,6 +41,7 @@ export function ProjectFormFields<T extends ProjectCreateFormData | ProjectUpdat
         control={form.control}
         name={"thumbnail" as Path<T>}
         label="썸네일"
+        onError={(message) => form.setError("thumbnail" as Path<T>, { message })}
       />
 
       {selectedProject?.thumbnail && (

@@ -10,7 +10,7 @@ export function AuthenticatedLayout() {
         <Header />
         <div className="flex flex-1 overflow-hidden">
           <AdminSidebar />
-          <SidebarInset className="flex-1 overflow-y-auto bg-muted p-2">
+          <SidebarInset className="flex-1 overflow-y-auto bg-background p-4">
             <Outlet />
           </SidebarInset>
         </div>
