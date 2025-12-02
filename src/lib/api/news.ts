@@ -2,7 +2,7 @@ import { apiClient } from "@/lib/api-client";
 import type { News } from "@/lib/schemas/news/news";
 import type { NewsCreateFormData } from "@/lib/schemas/news/news-create-form-data";
 import type { NewsPreview } from "@/lib/schemas/news/news-preview";
-import {type NewsUpdateFormData} from "@/lib/schemas/news/news-update-form-data";
+import { type NewsUpdateFormData } from "@/lib/schemas/news/news-update-form-data";
 
 export async function getNews(): Promise<NewsPreview[]> {
   return apiClient<NewsPreview[]>("news");

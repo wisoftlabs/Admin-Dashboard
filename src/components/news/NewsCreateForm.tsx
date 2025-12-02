@@ -1,18 +1,20 @@
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  type NewsCreateFormData,
-  NewsCreateFormDataSchema,
-} from "@/lib/schemas/news/news-create-form-data";
-import { useCreateNewsMutation } from "@/hooks/news/mutations";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+
 import {
   CheckboxFormField,
   InputFormField,
   TextAreaFormField,
 } from "@/components/shared/form-fields";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Spinner } from "@/components/ui/spinner";
+import { useCreateNewsMutation } from "@/hooks/news/mutations";
+import {
+  type NewsCreateFormData,
+  NewsCreateFormDataSchema,
+} from "@/lib/schemas/news/news-create-form-data";
 
 type NewsCreateFormProps = {
   onSuccess?: () => void;

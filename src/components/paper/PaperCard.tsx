@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { type PaperPreview } from "@/lib/schemas/paper/paper-preview";
-import { cn } from "@/lib/utils";
+
+import { Trash2 } from "lucide-react";
+
+import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
+import { ImageLightbox } from "@/components/shared/dialog/ImageLightBox";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Trash2 } from "lucide-react";
-import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { useDeletePaperMutation } from "@/hooks/paper/mutations";
-import {ImageLightbox} from "@/components/shared/dialog/ImageLightBox";
+import { type PaperPreview } from "@/lib/schemas/paper/paper-preview";
+import { cn } from "@/lib/utils";
 
 type PaperCardProps = {
   paper: PaperPreview;
@@ -24,18 +26,18 @@ export function PaperCard({ paper }: PaperCardProps) {
     <div
       className={cn(
         "group relative overflow-hidden rounded-lg bg-muted",
-        "aspect-[3/4]"
+        "aspect-[3/4]",
       )}
     >
       {isLoading && <Skeleton className="absolute inset-0 h-full w-full animate-pulse" />}
-      <ImageLightbox imageSrc={paper.image_url} >
+      <ImageLightbox imageSrc={paper.image_url}>
         <img
           src={paper.image_url}
           alt={`Paper ${paper.year}`}
           onLoad={() => setIsLoading(false)}
           className={cn(
             "h-full w-full object-cover transition-all duration-300 group-hover:scale-105",
-            isLoading ? "opacity-0" : "opacity-100"
+            isLoading ? "opacity-0" : "opacity-100",
           )}
           loading="lazy"
         />

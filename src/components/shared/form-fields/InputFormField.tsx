@@ -1,7 +1,8 @@
-import type {FieldValues} from "react-hook-form";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import type {BaseFieldProps} from "@/components/shared/form-fields/type";
+import type { FieldValues } from "react-hook-form";
+
+import type { BaseFieldProps } from "@/components/shared/form-fields/type";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 export function InputFormField<T extends FieldValues>({
   control,

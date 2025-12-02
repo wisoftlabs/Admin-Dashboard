@@ -1,7 +1,9 @@
 import { Outlet } from "react-router";
+
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AdminSidebar } from "@/layout/AdminSidebar";
+
 import { Header } from "./Header";
-import {AdminSidebar} from "@/layout/AdminSidebar";
-import {SidebarInset, SidebarProvider} from "@/components/ui/sidebar";
 
 export function AuthenticatedLayout() {
   return (

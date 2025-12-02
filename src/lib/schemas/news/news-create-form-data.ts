@@ -1,5 +1,6 @@
-import {NewsSchema} from "@/lib/schemas/news/news";
-import {z} from "zod";
+import { z } from "zod";
+
+import { NewsSchema } from "@/lib/schemas/news/news";
 
 export const NewsCreateFormDataSchema = NewsSchema.omit({
   id: true,

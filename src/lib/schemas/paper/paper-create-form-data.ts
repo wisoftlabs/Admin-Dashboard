@@ -1,6 +1,7 @@
-import {z} from "zod";
-import {PaperSchema} from "@/lib/schemas/paper/paper";
-import {ImageFileSchema} from "@/lib/schemas/common/image-file";
+import { z } from "zod";
+
+import { ImageFileSchema } from "@/lib/schemas/common/image-file";
+import { PaperSchema } from "@/lib/schemas/paper/paper";
 
 export const PaperCreateFormDataSchema = PaperSchema.omit({
   id: true,

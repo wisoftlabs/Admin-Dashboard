@@ -1,10 +1,6 @@
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton, SidebarFooter, SidebarGroup, SidebarRail,
-} from "@/components/ui/sidebar";
+import * as React from "react";
+import { useLocation, useNavigate } from "react-router";
+
 import {
   Award,
   FileText,
@@ -12,11 +8,17 @@ import {
   Home,
   Newspaper,
 } from "lucide-react";
-import { useNavigate, useLocation } from "react-router";
-import {SidebarUser} from "@/components/sidebar/SidebarUser";
-import * as React from "react";
-import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+
+import { SidebarUser } from "@/components/sidebar/SidebarUser";
+import { Button } from "@/components/ui/button";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter, SidebarGroup, SidebarMenu,
+  SidebarMenuButton, SidebarMenuItem,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 const sidebarNavItems = [
   {
@@ -60,15 +62,18 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {sidebarNavItems.map((item) => (
+            {sidebarNavItems.map(item => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton className="[&>svg]:size-5 [&>svg]:text-muted-foreground data-[active=true]:[&>svg]:text-foreground justify-start" size="lg" isActive={pathname === item.href} asChild>
                   <Button className="gap-4" onClick={() => navigate(item.href)} variant="ghost">
                     {item.icon}
                     <span className={cn(
                       "text-lg",
-                      pathname === item.href ? "font-extrabold text-foreground" : "font-semibold text-muted-foreground"
-                    )}>{item.title}</span>
+                      pathname === item.href ? "font-extrabold text-foreground" : "font-semibold text-muted-foreground",
+                    )}
+                    >
+                      {item.title}
+                    </span>
                   </Button>
                 </SidebarMenuButton>
               </SidebarMenuItem>

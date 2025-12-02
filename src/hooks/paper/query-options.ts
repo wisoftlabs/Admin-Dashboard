@@ -1,6 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
+
 import { getPapers } from "@/lib/api/paper";
-import { type Paper} from "@/lib/schemas/paper/paper";
+import { type Paper } from "@/lib/schemas/paper/paper";
 
 export const paperQueryOptions = {
   all: () => ["papers"] as const,

@@ -1,6 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
+
 import { getAwards } from "@/lib/api/award";
-import { type Award} from "@/lib/schemas/award/award";
+import { type Award } from "@/lib/schemas/award/award";
 
 export const awardQueryOptions = {
   all: () => ["awards"] as const,

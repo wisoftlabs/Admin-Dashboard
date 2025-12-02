@@ -1,13 +1,14 @@
-import { BanIcon } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { BanIcon } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 const errorTextVariants = cva("font-bold", {
   variants: {
     size: {
-      sm: "text-sm",
-      lg: "text-lg",
-      xl: "text-xl",
+      "sm": "text-sm",
+      "lg": "text-lg",
+      "xl": "text-xl",
       "2xl": "text-2xl",
     },
   },
@@ -19,7 +20,7 @@ const errorTextVariants = cva("font-bold", {
 type ErrorViewProps = {
   message: string;
   className?: string;
-} & VariantProps<typeof errorTextVariants>
+} & VariantProps<typeof errorTextVariants>;
 
 export function ErrorView({
   message,

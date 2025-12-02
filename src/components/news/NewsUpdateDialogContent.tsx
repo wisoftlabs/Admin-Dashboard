@@ -1,7 +1,7 @@
-import { useNewsById } from "@/hooks/news/queries";
-import { Spinner } from "@/components/ui/spinner";
-import { ErrorView } from "@/components/shared/error-view";
 import { NewsUpdateForm } from "@/components/news/NewsUpdateForm";
+import { ErrorView } from "@/components/shared/error-view";
+import { Spinner } from "@/components/ui/spinner";
+import { useNewsById } from "@/hooks/news/queries";
 
 type NewsEditDialogContentProps = {
   newsId: string;

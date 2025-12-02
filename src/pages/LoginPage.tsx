@@ -1,3 +1,7 @@
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -5,16 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useNavigate } from "react-router";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
+  const login = useAuthStore(state => state.login);
   const form = useForm();
 
   const handleLogin = () => {

@@ -1,13 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+
 import {
   createProject,
   deleteProject,
   updateProject,
 } from "@/lib/api/project";
-import { projectQueryOptions } from "./query-options";
 import type { ProjectCreateFormData } from "@/lib/schemas/project/project-create";
 import type { ProjectUpdateFormData } from "@/lib/schemas/project/project-update";
-import {toast} from "sonner";
+
+import { projectQueryOptions } from "./query-options";
 
 export function useCreateProjectMutation() {
   const queryClient = useQueryClient();

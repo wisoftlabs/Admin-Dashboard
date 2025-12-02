@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+
 import { useAuthStore } from "@/store/useAuthStore";
 
 export function LoginTimer() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const expiresAt = useAuthStore((state) => state.expiresAt);
-  const logout = useAuthStore((state) => state.logout);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+  const expiresAt = useAuthStore(state => state.expiresAt);
+  const logout = useAuthStore(state => state.logout);
   const [timeLeft, setTimeLeft] = useState<string>("");
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export function LoginTimer() {
       const seconds = Math.floor((diff / 1000) % 60);
 
       setTimeLeft(
-        `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+        `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`,
       );
     };
 

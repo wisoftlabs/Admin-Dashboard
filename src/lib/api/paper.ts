@@ -1,8 +1,8 @@
 import { apiClient } from "@/lib/api-client";
+import { ImageTypeSchema } from "@/lib/schemas/common/image-type";
 import type { Paper } from "@/lib/schemas/paper/paper";
 import type { PaperCreateFormData } from "@/lib/schemas/paper/paper-create-form-data";
-import {ImageTypeSchema} from "@/lib/schemas/common/image-type";
-import type {PaperPreview} from "@/lib/schemas/paper/paper-preview";
+import type { PaperPreview } from "@/lib/schemas/paper/paper-preview";
 
 export async function getPapers(): Promise<PaperPreview[]> {
   return await apiClient<PaperPreview[]>("papers");
@@ -17,7 +17,8 @@ export async function createPaper(data: PaperCreateFormData): Promise<Paper> {
   Object.entries(data).forEach(([key, value]) => {
     if (value instanceof File) {
       formData.append(key, value);
-    } else {
+    }
+    else {
       formData.append(key, String(value));
     }
   });

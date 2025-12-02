@@ -1,6 +1,7 @@
-import {z} from "zod";
-import {AwardSchema} from "@/lib/schemas/award/award";
-import {ImageFileSchema} from "@/lib/schemas/common/image-file";
+import { z } from "zod";
+
+import { AwardSchema } from "@/lib/schemas/award/award";
+import { ImageFileSchema } from "@/lib/schemas/common/image-file";
 
 export const AwardCreateFormDataSchema = AwardSchema.omit({
   id: true,

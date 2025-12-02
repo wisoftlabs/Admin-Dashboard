@@ -1,5 +1,6 @@
-import {z} from "zod";
-import {AwardSchema} from "@/lib/schemas/award/award";
+import { z } from "zod";
+
+import { AwardSchema } from "@/lib/schemas/award/award";
 
 export const AwardPreviewSchema = AwardSchema;
 

@@ -1,17 +1,19 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
+
+import { ProjectFormFields } from "@/components/project/ProjectFormFields";
+import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Spinner } from "@/components/ui/spinner";
+import { useDeleteProjectMutation, useUpdateProjectMutation } from "@/hooks/projects/mutations";
 import type { Project } from "@/lib/schemas/project/project";
 import {
-  ProjectUpdateFormDataSchema,
   type ProjectUpdateFormData,
+  ProjectUpdateFormDataSchema,
 } from "@/lib/schemas/project/project-update";
-import {useDeleteProjectMutation, useUpdateProjectMutation} from "@/hooks/projects/mutations";
-import { useEffect } from "react";
-import {ProjectFormFields} from "@/components/project/ProjectFormFields";
-import {Spinner} from "@/components/ui/spinner";
-import {ConfirmDialog} from "@/components/shared/dialog/ConfirmDialog";
 
 type ProjectUpdateFormProps = {
   selectedProject: Project;

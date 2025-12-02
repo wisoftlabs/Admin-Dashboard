@@ -1,9 +1,10 @@
-import type {PaperPreview} from "@/lib/schemas/paper/paper-preview";
-import {ChevronDownIcon} from "lucide-react";
-import {PaperCard} from "@/components/paper/PaperCard";
-import {Button} from "@/components/ui/button";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
-import {getCurrentYear} from "@/lib/time";
+import { ChevronDownIcon } from "lucide-react";
+
+import { PaperCard } from "@/components/paper/PaperCard";
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import type { PaperPreview } from "@/lib/schemas/paper/paper-preview";
+import { getCurrentYear } from "@/lib/time";
 
 type PaperYearSectionProps = {
   year: number;
@@ -32,7 +33,7 @@ export function PaperYearSection({
 
       <CollapsibleContent>
         <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4">
-          {papers.map((paper) => (
+          {papers.map(paper => (
             <div key={paper.id} className="mb-4 break-inside-avoid">
               <PaperCard paper={paper} />
             </div>

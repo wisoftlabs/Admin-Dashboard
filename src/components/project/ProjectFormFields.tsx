@@ -1,10 +1,11 @@
-import { type UseFormReturn, type Path } from "react-hook-form";
+import { type Path, type UseFormReturn } from "react-hook-form";
+
 import { ProjectMemberField } from "@/components/project/ProjectMemberField";
+import { ImageLightbox } from "@/components/shared/dialog/ImageLightBox";
+import { ImageFileFormField, InputFormField, TextAreaFormField, YearSelectField } from "@/components/shared/form-fields";
 import type { Project } from "@/lib/schemas/project/project";
 import type { ProjectCreateFormData } from "@/lib/schemas/project/project-create";
-import { ImageFileFormField, InputFormField, TextAreaFormField, YearSelectField } from "@/components/shared/form-fields";
 import type { ProjectUpdateFormData } from "@/lib/schemas/project/project-update";
-import {ImageLightbox} from "@/components/shared/dialog/ImageLightBox";
 
 type ProjectFormProps<T extends ProjectCreateFormData | ProjectUpdateFormData> = {
   form: UseFormReturn<T>;
@@ -42,7 +43,7 @@ export function ProjectFormFields<T extends ProjectCreateFormData | ProjectUpdat
         control={form.control}
         name={"thumbnail" as Path<T>}
         label="썸네일"
-        onError={(message) => form.setError("thumbnail" as Path<T>, { message })}
+        onError={message => form.setError("thumbnail" as Path<T>, { message })}
       />
 
       {selectedProject?.thumbnail && (

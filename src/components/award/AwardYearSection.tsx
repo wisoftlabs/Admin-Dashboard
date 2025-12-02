@@ -1,9 +1,10 @@
-import type {AwardPreview} from "@/lib/schemas/award/award-preview";
-import {ChevronDownIcon} from "lucide-react";
-import {AwardCard} from "@/components/award/AwardCard";
-import {Button} from "@/components/ui/button";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
-import {getCurrentYear} from "@/lib/time";
+import { ChevronDownIcon } from "lucide-react";
+
+import { AwardCard } from "@/components/award/AwardCard";
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import type { AwardPreview } from "@/lib/schemas/award/award-preview";
+import { getCurrentYear } from "@/lib/time";
 
 type AwardYearSectionProps = {
   year: number;
@@ -32,7 +33,7 @@ export function AwardYearSection({
 
       <CollapsibleContent>
         <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4">
-          {awards.map((award) => (
+          {awards.map(award => (
             <div key={award.id} className="mb-4 break-inside-avoid">
               <AwardCard award={award} />
             </div>

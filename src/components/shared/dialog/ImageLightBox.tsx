@@ -1,11 +1,12 @@
+import { type ComponentProps } from "react";
+
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
-  DialogTitle, DialogDescription,
+  DialogDescription,
+  DialogTitle, DialogTrigger,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { type ComponentProps } from "react";
 
 type ImageLightboxProps = {
   imageSrc: string;

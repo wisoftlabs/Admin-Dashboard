@@ -1,3 +1,5 @@
+import type { ComponentProps } from "react";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import type { ComponentProps } from "react";
 
 type ConfirmDialogProps = {
   title: string;
@@ -31,7 +32,11 @@ export function ConfirmDialog({
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>
-            이 작업은 <span className="font-semibold text-foreground">절대로</span> 되돌릴 수 없습니다. 계속 진행하시겠습니까?
+            이 작업은
+            {" "}
+            <span className="font-semibold text-foreground">절대로</span>
+            {" "}
+            되돌릴 수 없습니다. 계속 진행하시겠습니까?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

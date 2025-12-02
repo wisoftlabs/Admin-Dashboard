@@ -1,7 +1,8 @@
-import type {FieldValues} from "react-hook-form";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Textarea} from "@/components/ui/textarea";
-import type {BaseFieldProps} from "@/components/shared/form-fields/type";
+import type { FieldValues } from "react-hook-form";
+
+import type { BaseFieldProps } from "@/components/shared/form-fields/type";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
 
 export function TextAreaFormField<T extends FieldValues>({
   control,

@@ -1,6 +1,7 @@
-import {z} from "zod";
-import {ProjectSchema} from "@/lib/schemas/project/project";
-import {ThumbnailFileSchema} from "@/lib/schemas/common/thumbnail";
+import { z } from "zod";
+
+import { ThumbnailFileSchema } from "@/lib/schemas/common/thumbnail";
+import { ProjectSchema } from "@/lib/schemas/project/project";
 
 export const ProjectCreateFormDataSchema = ProjectSchema
   .omit({
@@ -8,6 +9,6 @@ export const ProjectCreateFormDataSchema = ProjectSchema
   })
   .extend({
     thumbnail: ThumbnailFileSchema,
-  })
+  });
 
 export type ProjectCreateFormData = z.infer<typeof ProjectCreateFormDataSchema>;

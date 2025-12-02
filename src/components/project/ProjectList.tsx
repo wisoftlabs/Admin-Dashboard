@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import { ErrorView } from "@/components/shared/error-view";
+import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import {
   Pagination,
   PaginationContent,
@@ -6,12 +9,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useProjects } from "@/hooks/projects/queries";
 import type { Project } from "@/lib/schemas/project/project";
 import { cn } from "@/lib/utils";
-import { useProjects } from "@/hooks/projects/queries";
-import {Item, ItemContent, ItemDescription, ItemMedia, ItemTitle} from "@/components/ui/item";
-import { Skeleton } from "@/components/ui/skeleton";
-import {ErrorView} from "@/components/shared/error-view";
 
 type ProjectListProps = {
   selectedProject: Project | null;
@@ -36,7 +37,7 @@ export function ProjectList({
   }
 
   if (isError) {
-    return <ErrorView message="프로젝트 목록을 불러오는 중 에러가 발생했습니다." />
+    return <ErrorView message="프로젝트 목록을 불러오는 중 에러가 발생했습니다." />;
   }
 
   const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
@@ -45,11 +46,11 @@ export function ProjectList({
   const currentProjects = projects.slice(startIndex, endIndex);
 
   const handlePreviousPage = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
+    setCurrentPage(prev => Math.max(prev - 1, 1));
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
   };
 
   return (
@@ -71,7 +72,10 @@ export function ProjectList({
           </PaginationItem>
           <PaginationItem>
             <span className="p-2">
-              {currentPage} / {totalPages}
+              {currentPage}
+              {" "}
+              /
+              {totalPages}
             </span>
           </PaginationItem>
           <PaginationItem>
@@ -89,12 +93,14 @@ export function ProjectList({
         </PaginationContent>
       </Pagination>
       <div className="grid flex-1 grid-rows-5 gap-2 min-h-0">
-        {currentProjects.map((project) => <ProjectListItem
-          key={project.id}
-          project={project}
-          onClick={() => onSelectProject(project)}
-          isSelected={selectedProject?.id === project.id}
-        />)}
+        {currentProjects.map(project => (
+          <ProjectListItem
+            key={project.id}
+            project={project}
+            onClick={() => onSelectProject(project)}
+            isSelected={selectedProject?.id === project.id}
+          />
+        ))}
       </div>
     </div>
   );
@@ -122,16 +128,16 @@ function ProjectListSkeleton() {
 
 type ProjectListItemProps = {
   onClick: () => void;
-  isSelected: boolean
+  isSelected: boolean;
   project: Project;
-}
+};
 
 function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps) {
   return (
     <Item
       className={cn(
         "h-full p-2 gap-3 items-stretch select-none cursor-pointer",
-        isSelected ? "border-ring bg-accent/5" : ""
+        isSelected ? "border-ring bg-accent/5" : "",
       )}
       onClick={onClick}
       variant="outline"

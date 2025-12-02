@@ -1,4 +1,5 @@
 import { useLocation } from "react-router";
+
 import wisoftLogo from "@/assets/wisoft-fav.webp";
 
 const pathTitles: { [key: string]: string } = {

@@ -1,3 +1,6 @@
+import type { ComponentProps } from "react";
+
+import { PaperCreateForm } from "@/components/paper/PaperCreateForm";
 import {
   Dialog,
   DialogContent,
@@ -6,8 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {PaperCreateForm} from "@/components/paper/PaperCreateForm";
-import type {ComponentProps} from "react";
 
 type PaperCreateDialogProps = {
   onCreated: () => void;

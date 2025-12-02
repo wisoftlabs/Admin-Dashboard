@@ -1,8 +1,9 @@
-import type {FieldValues} from "react-hook-form";
-import {generateComingYears} from "@/lib/time";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import type {BaseFieldProps} from "@/components/shared/form-fields/type";
+import type { FieldValues } from "react-hook-form";
+
+import type { BaseFieldProps } from "@/components/shared/form-fields/type";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { generateComingYears } from "@/lib/time";
 
 export function YearSelectField<T extends FieldValues>({
   control,
@@ -22,7 +23,7 @@ export function YearSelectField<T extends FieldValues>({
           <FormLabel>{label}</FormLabel>
           <Select
             disabled={disabled}
-            onValueChange={(val) => field.onChange(Number(val))}
+            onValueChange={val => field.onChange(Number(val))}
             value={field.value?.toString()}
           >
             <FormControl>
@@ -31,9 +32,10 @@ export function YearSelectField<T extends FieldValues>({
               </SelectTrigger>
             </FormControl>
             <SelectContent className="w-32">
-              {years.map((year) => (
+              {years.map(year => (
                 <SelectItem key={year} value={year.toString()}>
-                  {year}년
+                  {year}
+                  년
                 </SelectItem>
               ))}
             </SelectContent>

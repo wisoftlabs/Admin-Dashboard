@@ -1,3 +1,6 @@
+import type { ComponentProps } from "react";
+
+import { NewsCreateForm } from "@/components/news/NewsCreateForm";
 import {
   Dialog,
   DialogContent,
@@ -6,8 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { NewsCreateForm } from "@/components/news/NewsCreateForm";
-import type { ComponentProps } from "react";
 
 type NewsCreateDialogProps = {
   onCreated: () => void;

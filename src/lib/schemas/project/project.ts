@@ -1,5 +1,6 @@
-import {z} from "zod";
-import {MemberSchema} from "@/lib/schemas/project/member";
+import { z } from "zod";
+
+import { MemberSchema } from "@/lib/schemas/project/member";
 
 export const ProjectSchema = z.object({
   id: z.uuid(),

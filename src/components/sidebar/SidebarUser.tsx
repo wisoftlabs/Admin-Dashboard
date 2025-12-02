@@ -1,4 +1,9 @@
 import { useNavigate } from "react-router";
+
+import { Clock, LogOut } from "lucide-react";
+
+import WisoftLogo from "@/assets/wisoft-fav.webp";
+import { LoginTimer } from "@/components/sidebar/LoginTimer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,14 +11,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import WisoftLogo from "@/assets/wisoft-fav.webp";
 import { useAuthStore } from "@/store/useAuthStore";
-import { Clock, LogOut } from "lucide-react";
-import {LoginTimer} from "@/components/sidebar/LoginTimer";
 
 export function SidebarUser() {
   const navigate = useNavigate();
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useAuthStore(state => state.logout);
 
   const handleLogout = () => {
     logout();

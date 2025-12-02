@@ -1,18 +1,20 @@
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { YearSelectField } from "@/components/shared/form-fields";
+import { ImageFileFormField } from "@/components/shared/form-fields/ImageFileFormField";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+} from "@/components/ui/form";
+import { Spinner } from "@/components/ui/spinner";
+import { useCreatePaperMutation } from "@/hooks/paper/mutations";
 import {
   type PaperCreateFormData,
   PaperCreateFormDataSchema,
 } from "@/lib/schemas/paper/paper-create-form-data";
-import { useCreatePaperMutation } from "@/hooks/paper/mutations";
-import {
-  Form,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { ImageFileFormField } from "@/components/shared/form-fields/ImageFileFormField";
-import {Spinner} from "@/components/ui/spinner";
-import {YearSelectField} from "@/components/shared/form-fields";
-import {getCurrentYear} from "@/lib/time";
+import { getCurrentYear } from "@/lib/time";
 
 type PaperCreateFormProps = {
   onSuccess?: () => void;
@@ -32,7 +34,7 @@ export function PaperCreateForm({ onSuccess }: PaperCreateFormProps) {
   const onSubmit = async (formData: PaperCreateFormData) => {
     createPaper(formData,
       {
-        onSuccess: () => onSuccess?.()
+        onSuccess: () => onSuccess?.(),
       },
     );
   };
@@ -50,7 +52,7 @@ export function PaperCreateForm({ onSuccess }: PaperCreateFormProps) {
           control={form.control}
           name="image_file"
           label="이미지 파일"
-          onError={(message) => form.setError("image_file", {
+          onError={message => form.setError("image_file", {
             message,
           })}
         />

@@ -1,3 +1,5 @@
+import { NewsTableRow } from "@/components/news/NewsTableRow";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -6,9 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { NewsTableRow } from "@/components/news/NewsTableRow";
 import type { NewsPreview } from "@/lib/schemas/news/news-preview";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type NewsListProps = {
   title: string;
@@ -33,15 +33,18 @@ export function NewsList({ news, title }: NewsListProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {news.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={4} className="h-36 text-center hover:bg-background select-none text-muted-foreground">
-                    {title}이 없습니다.
-                  </TableCell>
-                </TableRow>
-              ) : (
-                news.map((item) => <NewsTableRow key={item.id} news={item} />)
-              )}
+              {news.length === 0
+                ? (
+                    <TableRow>
+                      <TableCell colSpan={4} className="h-36 text-center hover:bg-background select-none text-muted-foreground">
+                        {title}
+                        이 없습니다.
+                      </TableCell>
+                    </TableRow>
+                  )
+                : (
+                    news.map(item => <NewsTableRow key={item.id} news={item} />)
+                  )}
             </TableBody>
           </Table>
         </div>

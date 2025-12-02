@@ -1,6 +1,9 @@
-import type {FieldValues} from "react-hook-form";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import type {BaseFieldProps} from "@/components/shared/form-fields/type";
+import type { FieldValues } from "react-hook-form";
+
+import { CloudUploadIcon, XIcon } from "lucide-react";
+
+import type { BaseFieldProps } from "@/components/shared/form-fields/type";
+import { Button } from "@/components/ui/button";
 import {
   FileUpload,
   FileUploadDropzone,
@@ -8,14 +11,13 @@ import {
   FileUploadList,
   FileUploadTrigger,
 } from "@/components/ui/file-upload";
-import {CloudUploadIcon, XIcon} from "lucide-react";
-import {Button} from "@/components/ui/button";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 export function ImageFileFormField<T extends FieldValues>({
   control,
   name,
   label,
-  onError
+  onError,
 }: Omit<BaseFieldProps<T>, "placeholder"> & { onError: (msg?: string) => void }) {
   return (
     <FormField
@@ -42,7 +44,8 @@ export function ImageFileFormField<T extends FieldValues>({
 
                 <div className="space-y-1">
                   <p className="text-sm font-medium text-foreground">
-                    이미지를 드래그하거나{" "}
+                    이미지를 드래그하거나
+                    {" "}
                     <FileUploadTrigger asChild>
                       <span className="cursor-pointer font-semibold text-primary underline underline-offset-4 hover:text-primary/80">
                         파일 선택

@@ -1,12 +1,14 @@
-import { useNews } from "@/hooks/news/queries";
 import { useMemo } from "react";
+
+import { PlusIcon } from "lucide-react";
+
+import { NewsCreateDialog } from "@/components/news/NewsCreateDialog";
+import { NewsList } from "@/components/news/NewsList";
 import { ErrorView } from "@/components/shared/error-view";
 import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
-import { NewsCreateDialog } from "@/components/news/NewsCreateDialog";
-import { useDialog } from "@/hooks/shared/use-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { NewsList } from "@/components/news/NewsList";
+import { useNews } from "@/hooks/news/queries";
+import { useDialog } from "@/hooks/shared/use-dialog";
 
 export function NewsPage() {
   const { data: news = [], isError, isLoading } = useNews();
@@ -17,8 +19,8 @@ export function NewsPage() {
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
     );
-    const pinned = sorted.filter((item) => item.is_pin);
-    const other = sorted.filter((item) => !item.is_pin);
+    const pinned = sorted.filter(item => item.is_pin);
+    const other = sorted.filter(item => !item.is_pin);
     return { pinnedNews: pinned, otherNews: other };
   }, [news]);
 
@@ -41,7 +43,8 @@ export function NewsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">공지사항 관리</h1>
           <p className="text-sm text-muted-foreground">
-            {news.length}개 등록됨
+            {news.length}
+            개 등록됨
           </p>
         </div>
         <NewsCreateDialog
@@ -50,7 +53,8 @@ export function NewsPage() {
           onCreated={closeDialog}
         >
           <Button>
-            <PlusIcon className="mr-2" />새 공지사항
+            <PlusIcon className="mr-2" />
+            새 공지사항
           </Button>
         </NewsCreateDialog>
       </div>

@@ -1,19 +1,21 @@
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpdateNewsMutation } from "@/hooks/news/mutations";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+
 import {
   CheckboxFormField,
   InputFormField,
   TextAreaFormField,
 } from "@/components/shared/form-fields";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Spinner } from "@/components/ui/spinner";
+import { useUpdateNewsMutation } from "@/hooks/news/mutations";
+import { type News } from "@/lib/schemas/news/news";
 import {
   type NewsUpdateFormData,
   NewsUpdateFormDataSchema,
 } from "@/lib/schemas/news/news-update-form-data";
-import { type News } from "@/lib/schemas/news/news";
 
 type NewsEditFormProps = {
   news: News;

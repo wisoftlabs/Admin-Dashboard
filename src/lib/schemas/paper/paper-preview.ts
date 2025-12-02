@@ -1,5 +1,6 @@
-import {z} from "zod";
-import {PaperSchema} from "@/lib/schemas/paper/paper";
+import { z } from "zod";
+
+import { PaperSchema } from "@/lib/schemas/paper/paper";
 
 export const PaperPreviewSchema = PaperSchema;
 

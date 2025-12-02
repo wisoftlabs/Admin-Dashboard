@@ -1,3 +1,6 @@
+import type { ComponentProps } from "react";
+
+import { NewsUpdateDialogContent } from "@/components/news/NewsUpdateDialogContent";
 import {
   Dialog,
   DialogContent,
@@ -6,8 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { ComponentProps } from "react";
-import { NewsUpdateDialogContent } from "@/components/news/NewsUpdateDialogContent";
 
 type NewsEditDialogProps = {
   newsId: string;

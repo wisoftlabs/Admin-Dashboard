@@ -1,4 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
+
 import { getProject, getProjects } from "@/lib/api/project";
 
 export const projectQueryOptions = {

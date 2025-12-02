@@ -1,4 +1,9 @@
-import {useFieldArray, type Control, type ArrayPath, type FieldArray} from "react-hook-form";
+import { type ArrayPath, type Control, type FieldArray, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PlusIcon, X } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,13 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {PlusIcon, X} from "lucide-react";
+import { type Member, MemberSchema } from "@/lib/schemas/project/member";
 import type { ProjectCreateFormData } from "@/lib/schemas/project/project-create";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { ProjectUpdateFormData } from "@/lib/schemas/project/project-update";
+
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
-import {type Member, MemberSchema} from "@/lib/schemas/project/member";
-import type {ProjectUpdateFormData} from "@/lib/schemas/project/project-update";
 
 type ProjectFormData = ProjectCreateFormData | ProjectUpdateFormData;
 
@@ -34,7 +37,6 @@ export function ProjectMemberField<T extends ProjectFormData>({ control }: Proje
     resolver: zodResolver(MemberSchema),
     defaultValues: { name: "", extra: "" },
   });
-
 
   const handleAddMember = async () => {
     const isValid = await form.trigger();
@@ -90,39 +92,40 @@ export function ProjectMemberField<T extends ProjectFormData>({ control }: Proje
             </TableRow>
           </TableHeader>
           <TableBody>
-            {fields.length > 0 ? (
-              fields.map((field, index) => {
-                const member = field as unknown as Member;
+            {fields.length > 0
+              ? (
+                  fields.map((field, index) => {
+                    const member = field as unknown as Member;
 
-                return (
-                  <TableRow key={field.id}>
-                    <TableCell className="py-0.5 px-2">{member.name}</TableCell>
-                    <TableCell className="py-0.5 px-2">{member.extra}</TableCell>
-                    <TableCell className="py-0.5 px-2">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => remove(index)}
-                        className="size-6"
-                      >
-                        <X className="size-3 text-destructive" />
-                      </Button>
+                    return (
+                      <TableRow key={field.id}>
+                        <TableCell className="py-0.5 px-2">{member.name}</TableCell>
+                        <TableCell className="py-0.5 px-2">{member.extra}</TableCell>
+                        <TableCell className="py-0.5 px-2">
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => remove(index)}
+                            className="size-6"
+                          >
+                            <X className="size-3 text-destructive" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                )
+              : (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center py-1 px-2">
+                      멤버가 없습니다.
                     </TableCell>
                   </TableRow>
-                );
-              })
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3} className="text-center py-1 px-2">
-                  멤버가 없습니다.
-                </TableCell>
-              </TableRow>
-            )}
+                )}
           </TableBody>
         </Table>
       </div>
     </div>
   );
 }
-

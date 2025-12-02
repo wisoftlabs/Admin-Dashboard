@@ -10,7 +10,7 @@ type AuthStore = {
 
 export const useAuthStore = create(
   persist<AuthStore>(
-    (set) => ({
+    set => ({
       isAuthenticated: false,
       expiresAt: null,
       login: () =>
@@ -22,6 +22,6 @@ export const useAuthStore = create(
     }),
     {
       name: "auth-store",
-    }
-  )
+    },
+  ),
 );

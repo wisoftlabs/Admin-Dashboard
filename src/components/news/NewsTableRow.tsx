@@ -1,16 +1,17 @@
-import { TableCell, TableRow } from "@/components/ui/table";
+import { Trash2 } from "lucide-react";
+
+import { NewsUpdateDialog } from "@/components/news/NewsUpdateDialog";
+import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { Badge } from "@/components/ui/badge";
-import { formatDate } from "@/lib/date";
+import { Button } from "@/components/ui/button";
+import { TableCell, TableRow } from "@/components/ui/table";
 import {
   useDeleteNewsMutation,
   useToggleNewsPinMutation,
 } from "@/hooks/news/mutations";
 import { useDialog } from "@/hooks/shared/use-dialog";
-import { NewsUpdateDialog } from "@/components/news/NewsUpdateDialog";
+import { formatDate } from "@/lib/date";
 import type { NewsPreview } from "@/lib/schemas/news/news-preview";
-import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
-import { Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 type NewsTableRowProps = {
   news: NewsPreview;
@@ -58,4 +59,3 @@ export function NewsTableRow({ news }: NewsTableRowProps) {
     </TableRow>
   );
 }
-

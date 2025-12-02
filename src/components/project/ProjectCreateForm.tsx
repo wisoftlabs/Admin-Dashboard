@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
+
+import { ProjectFormFields } from "@/components/project/ProjectFormFields";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Spinner } from "@/components/ui/spinner";
+import { useCreateProjectMutation } from "@/hooks/projects/mutations";
 import {
-  ProjectCreateFormDataSchema,
   type ProjectCreateFormData,
+  ProjectCreateFormDataSchema,
 } from "@/lib/schemas/project/project-create";
 import { getCurrentYear } from "@/lib/time";
-import { useCreateProjectMutation } from "@/hooks/projects/mutations";
-import {ProjectFormFields} from "@/components/project/ProjectFormFields";
-import {Spinner} from "@/components/ui/spinner";
 
 type ProjectCreateFormProps = {
   onSuccess: () => void;

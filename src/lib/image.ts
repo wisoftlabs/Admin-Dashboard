@@ -1,6 +1,6 @@
 import { type Orientation } from "@/lib/schemas/common/orientation";
 
-type Size = { width: number; height: number }
+type Size = { width: number; height: number };
 
 export async function getImageResolutions(file: File): Promise<Size> {
   const bitmap = await createImageBitmap(file);

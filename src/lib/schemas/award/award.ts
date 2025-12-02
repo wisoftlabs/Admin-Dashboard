@@ -1,6 +1,7 @@
-import {z} from "zod";
-import {OrientationSchema} from "@/lib/schemas/common/orientation";
-import {ImageTypeSchema} from "@/lib/schemas/common/image-type";
+import { z } from "zod";
+
+import { ImageTypeSchema } from "@/lib/schemas/common/image-type";
+import { OrientationSchema } from "@/lib/schemas/common/orientation";
 
 export const AwardSchema = z.object({
   id: z.uuid(),

@@ -1,15 +1,16 @@
-import { Separator } from "@/components/ui/separator";
-import { ProjectList } from "@/components/project/ProjectList";
 import { useState } from "react";
-import type { Project } from "@/lib/schemas/project/project";
+
 import { ProjectCreateForm } from "@/components/project/ProjectCreateForm";
+import { ProjectList } from "@/components/project/ProjectList";
 import { ProjectUpdateForm } from "@/components/project/ProjectUpdateForm";
+import { Separator } from "@/components/ui/separator";
+import type { Project } from "@/lib/schemas/project/project";
 
 export function ProjectPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const handleSelectProject = (project: Project) => {
-    setSelectedProject((prev) => (prev?.id === project.id ? null : project));
+    setSelectedProject(prev => (prev?.id === project.id ? null : project));
   };
 
   const handleDeselect = () => {
@@ -26,11 +27,13 @@ export function ProjectPage() {
       </div>
       <Separator orientation="vertical" />
       <div className="w-2/5">
-        {selectedProject ? (
-          <ProjectUpdateForm selectedProject={selectedProject} onDeleted={handleDeselect} />
-        ) : (
-          <ProjectCreateForm onSuccess={handleDeselect} />
-        )}
+        {selectedProject
+          ? (
+              <ProjectUpdateForm selectedProject={selectedProject} onDeleted={handleDeselect} />
+            )
+          : (
+              <ProjectCreateForm onSuccess={handleDeselect} />
+            )}
       </div>
     </div>
   );

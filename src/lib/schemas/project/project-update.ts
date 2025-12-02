@@ -1,6 +1,8 @@
+import { z } from "zod";
+
+import { ThumbnailFileSchema } from "@/lib/schemas/common/thumbnail";
+
 import { ProjectCreateFormDataSchema } from "./project-create";
-import {ThumbnailFileSchema} from "@/lib/schemas/common/thumbnail";
-import {z} from "zod";
 
 export const ProjectUpdateFormDataSchema = ProjectCreateFormDataSchema.extend({
   thumbnail: ThumbnailFileSchema.optional(),
