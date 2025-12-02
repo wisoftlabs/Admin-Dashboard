@@ -4,6 +4,7 @@ import type { Project } from "@/lib/schemas/project/project";
 import type { ProjectCreateFormData } from "@/lib/schemas/project/project-create";
 import { ImageFileFormField, InputFormField, TextAreaFormField, YearSelectField } from "@/components/shared/form-fields";
 import type { ProjectUpdateFormData } from "@/lib/schemas/project/project-update";
+import {ImageLightbox} from "@/components/shared/dialog/ImageLightBox";
 
 type ProjectFormProps<T extends ProjectCreateFormData | ProjectUpdateFormData> = {
   form: UseFormReturn<T>;
@@ -45,11 +46,13 @@ export function ProjectFormFields<T extends ProjectCreateFormData | ProjectUpdat
       />
 
       {selectedProject?.thumbnail && (
-        <img
-          src={selectedProject.thumbnail}
-          alt="Project Thumbnail"
-          className="rounded-md border w-full max-w-xs"
-        />
+        <ImageLightbox imageSrc={selectedProject.thumbnail}>
+          <img
+            src={selectedProject.thumbnail}
+            alt="Project Thumbnail"
+            className="rounded-md border w-full max-w-xs"
+          />
+        </ImageLightbox>
       )}
     </div>
   );

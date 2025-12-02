@@ -27,14 +27,14 @@ export function ImageLightbox({
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-w-[90vw] border-none bg-transparent shadow-none p-0" showCloseButton={false}>
+      <DialogContent className="max-w-none size-fit border-none bg-transparent shadow-none p-0" showCloseButton={false}>
         <DialogTitle className="sr-only">{alt}</DialogTitle>
         <DialogDescription className="sr-only">{alt}</DialogDescription>
         <div className="relative flex items-center justify-center">
           <img
             src={imageSrc}
             alt={alt}
-            className="max-h-[85vh] w-auto rounded-md object-contain shadow-2xl"
+            className="max-w-[90vw] max-h-[85vh] w-auto h-auto rounded-md object-contain shadow-2xl"
           />
         </div>
       </DialogContent>
