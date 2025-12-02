@@ -1,11 +1,11 @@
-import { useState } from "react"; // 1. useState 추가
+import { useState } from "react";
 
 import { Trash2 } from "lucide-react";
 
 import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { ImageLightbox } from "@/components/shared/dialog/ImageLightBox";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton"; // 2. Skeleton import
+import { Skeleton } from "@/components/ui/skeleton";
 import { useDeleteAwardMutation } from "@/hooks/award/mutations";
 import { type AwardPreview } from "@/lib/schemas/award/award-preview";
 import { cn } from "@/lib/utils";

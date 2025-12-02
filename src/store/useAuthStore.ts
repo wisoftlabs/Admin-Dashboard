@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 
 type AuthStore = {
   isAuthenticated: boolean;
-  expiresAt: number | null; // 만료 시간 (Timestamp)
+  expiresAt: number | null;
   login: () => void;
   logout: () => void;
 };
