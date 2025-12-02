@@ -3,7 +3,7 @@ import {
   SidebarContent,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton, SidebarFooter, SidebarGroup,
+  SidebarMenuButton, SidebarFooter, SidebarGroup, SidebarRail,
 } from "@/components/ui/sidebar";
 import {
   Award,
@@ -48,32 +48,33 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
   const { pathname } = useLocation();
 
   return (
-      <Sidebar
-        className="top-(--header-height) h-[calc(99.9svh-var(--header-height))]! flex-shrink-0"
-        collapsible="none"
-        variant="sidebar"
-        {...props}
-      >
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarMenu>
-              {sidebarNavItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size="lg" isActive={pathname === item.href}>
-                    <Link to={item.href}>
-                      {item.icon}
-                      <span className="text-lg font-bold">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroup>
+    <Sidebar
+      className="flex-shrink-0"
+      collapsible="none"
+      variant="sidebar"
+      {...props}
+    >
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarMenu>
+            {sidebarNavItems.map((item) => (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild size="lg" isActive={pathname === item.href}>
+                  <Link to={item.href}>
+                    {item.icon}
+                    <span className="text-lg font-bold">{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
 
-        </SidebarContent>
-        <SidebarFooter>
-          <SidebarUser />
-        </SidebarFooter>
-      </Sidebar>
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarUser />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
   );
 }

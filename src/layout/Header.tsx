@@ -1,12 +1,12 @@
-import { useLocation } from 'react-router';
-import wisoftLogo from '@/assets/wisoft-fav.webp';
+import { useLocation } from "react-router";
+import wisoftLogo from "@/assets/wisoft-fav.webp";
 
 const pathTitles: { [key: string]: string } = {
-  '/home': 'Home',
-  '/news': 'News',
-  '/project': 'Projects',
-  '/paper': 'Papers',
-  '/award': 'Awards',
+  "/home": "Home",
+  "/news": "News",
+  "/project": "Projects",
+  "/paper": "Papers",
+  "/award": "Awards",
 };
 
 export function Header() {
