@@ -1,75 +1,44 @@
-# React + TypeScript + Vite
+# Wisoft 관리자 대시보드
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 시작하기
 
-Currently, two official plugins are available:
+### 전제 조건
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Bun](https://bun.sh/)이 설치되어 있는지 확인하세요.
 
-## React Compiler
+Bun 1.3.3을 기준으로 개발되었습니다. (.tool-versions 참고)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### 설치
 
-Note: This will impact Vite dev & build performances.
+1. 저장소를 클론합니다.
+   ```bash
+   git clone https://github.com/wisoftlabs/Admin-Dashboard.git
+   ```
+2. 의존성을 설치합니다.
+   ```bash
+   bun install
+   ```
 
-## Expanding the ESLint configuration
+### 개발
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+개발 서버와 테스트용 JSON 서버를 시작하려면
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+이 명령은 React 개발 서버와 API 모킹을 위한 `json-server`를 동시에 시작합니다.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 프로덕션 빌드
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+프로젝트를 프로덕션용으로 빌드하려면
+
+```bash
+bun run build
+```
+
+빌드 후, 아래 명령어를 통해 로컬에서 프로덕션 빌드를 미리 볼 수 있습니다.
+
+```bash
+bun run preview
 ```
