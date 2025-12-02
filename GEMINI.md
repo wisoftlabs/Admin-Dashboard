@@ -55,6 +55,8 @@
 - **React 19 Usage:** Utilize React Compiler optimizations. Use `use` API if needed.
 - **Icons**: use icon from `lucide-react` is already installed.
 - React Component Definition(ex. export function ComponentName() {})
+- To resolve the error, use `bun lint` to lint the problematic file and refer to the information obtained.
+- use String "" (double quote)
 
 ## 4. Data Fetching (Tanstack Query)
 - **Location:** Query logic must reside in `src/hooks/<domain>/`.
