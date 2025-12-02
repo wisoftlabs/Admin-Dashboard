@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { useProjects } from "@/hooks/projects/queries";
 import {Item, ItemContent, ItemDescription, ItemMedia, ItemTitle} from "@/components/ui/item";
 import { Skeleton } from "@/components/ui/skeleton";
+import {ErrorView} from "@/components/shared/error-view";
 
 type ProjectListProps = {
   selectedProject: Project | null;
@@ -25,7 +26,7 @@ export function ProjectList({
 }: ProjectListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const {
-    data: projects,
+    data: projects = [],
     isLoading,
     isError,
   } = useProjects();
@@ -34,8 +35,8 @@ export function ProjectList({
     return <ProjectListSkeleton />;
   }
 
-  if (isError || !projects) {
-    return <div>오류가 발생했습니다.</div>;
+  if (isError) {
+    return <ErrorView message="프로젝트 목록을 불러오는 중 에러가 발생했습니다." />
   }
 
   const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
