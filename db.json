@@ -159,5 +159,25 @@
       "image_type": "jpg",
       "orientation": "landscape"
     }
+  ],
+  "papers": [
+    {
+      "id": "f0e1d2c3-b4a5-6789-0123-456789abcdef",
+      "year": 2023,
+      "image_url": "https://picsum.photos/seed/paper1/600/800",
+      "image_type": "jpg"
+    },
+    {
+      "id": "12345678-90ab-cdef-0123-456789abcdef",
+      "year": 2024,
+      "image_url": "https://picsum.photos/seed/paper2/600/800",
+      "image_type": "jpg"
+    },
+    {
+      "id": "fedcba98-7654-3210-fedc-ba9876543210",
+      "year": 2025,
+      "image_url": "https://picsum.photos/seed/paper3/600/800",
+      "image_type": "jpg"
+    }
   ]
 }
