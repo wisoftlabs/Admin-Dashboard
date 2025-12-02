@@ -57,6 +57,9 @@
 - React Component Definition(ex. export function ComponentName() {})
 - To resolve the error, use `bun lint` to lint the problematic file and refer to the information obtained.
 - use String "" (double quote)
+- Always use the import type syntax when importing types in TypeScript.
+- Analyze the ESLint configuration file to understand and apply the project's coding conventions before generating code.
+  - `./eslint.config.js`
 
 ## 4. Data Fetching (Tanstack Query)
 - **Location:** Query logic must reside in `src/hooks/<domain>/`.
@@ -81,9 +84,8 @@ src/hooks/projects/useProjectQueries.ts      (Hook: camel)
 Query Options Pattern (src/hooks/projects/useProjectQueries.ts)
 ```typescript
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import { type Project } from '@lib/schema/project.ts'
+import { type Project } from '@lib/schema/project'
 
-// Factory Object
 export const projectQueries = {
   all: () => ['projects'] as const,
   listKey: () => [...projectQueries.all(), "list"],
@@ -93,6 +95,11 @@ export const projectQueries = {
     queryOptions({
       queryKey: [...projectQueries.listKey()],
       queryFn: () => api.allProjects(),
+    }),
+  detail: (id: Project["id"]) =>
+    queryOptions({
+      queryKey: [...projectQueries.detailKey(id)],
+      queryFn: () => api.getProject(id),
     }),
 };
 ```
