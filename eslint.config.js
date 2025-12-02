@@ -4,13 +4,22 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import stylistic from "@stylistic/eslint-plugin";
+import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
   globalIgnores(["dist"]),
+  stylistic.configs.customize({
+    jsx: true,
+    semi: true,
+    indent: 2,
+    quotes: "double",
+    commaDangle: "always-multiline",
+  }),
   {
     plugins: {
       "@stylistic": stylistic,
+      "simple-import-sort": eslintPluginSimpleImportSort,
     },
     files: ["**/*.{ts,tsx}"],
     ignores: ["./src/components/ui/*.tsx"],
@@ -25,8 +34,20 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      "@stylistic/indent": ["error", 2],
-      "@stylistic/quotes": ["error", "double"],
+      "simple-import-sort/imports": [
+        "error",
+        {
+          groups: [
+            ["^\\u0000"],
+            ["^react"],
+            ["^@?\\w"],
+            ["^@/"],
+            ["^\\."],
+            ["^/"],
+          ],
+        },
+      ],
+      "simple-import-sort/exports": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^", varsIgnorePattern: "^" },
