@@ -17,25 +17,26 @@ export function PatentCreateFormFields<T extends PatentCreateFormData>({
 }: PatentFormProps<T>) {
   return (
     <div className="flex flex-col gap-4">
+      <div className="grid grid-cols-2 gap-4">
+        <YearSelectField
+          control={form.control}
+          name={"year" as Path<T>}
+          label="출원년도"
+        />
+
+        <DatePickerFormField
+          control={form.control}
+          name={"invention_date" as Path<T>}
+          label="출원일"
+        />
+      </div>
+
       <InputFormField
         control={form.control}
         name={"name" as Path<T>}
         label="특허명"
         placeholder="특허명을 입력하세요."
       />
-
-      <YearSelectField
-        control={form.control}
-        name={"year" as Path<T>}
-        label="출원년도"
-      />
-
-      <DatePickerFormField
-        control={form.control}
-        name={"invention_date" as Path<T>}
-        label="출원일"
-      />
-
       <InputFormField
         control={form.control}
         name={"link" as Path<T>}
