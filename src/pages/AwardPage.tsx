@@ -1,8 +1,8 @@
 import { groupBy } from "es-toolkit";
 import { PlusIcon } from "lucide-react";
 
-import { AwardCreateDialog } from "@/components/award/AwardCreateDialog";
 import { AwardYearSection } from "@/components/award/AwardYearSection";
+import { AwardCreateDialog } from "@/components/award/CreateDialog";
 import { ErrorView } from "@/components/shared/error-view";
 import { Button } from "@/components/ui/button";
 import { useAwards } from "@/hooks/award/queries";
@@ -27,7 +27,6 @@ export function AwardPage() {
       <div className="border-b pb-6">
         <div className="flex justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">수상내역</h1>
             <p className="text-sm text-muted-foreground">
               전체
               {Object.values(groupedAwards).flat().length}

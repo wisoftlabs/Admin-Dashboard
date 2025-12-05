@@ -5,9 +5,11 @@ import wisoftLogo from "@/assets/wisoft-fav.webp";
 const pathTitles: { [key: string]: string } = {
   "/home": "Home",
   "/news": "News",
-  "/project": "Projects",
-  "/paper": "Papers",
-  "/award": "Awards",
+  "/gallery": "Gallery",
+  "/project": "Project",
+  "/paper": "Paper",
+  "/award": "Award",
+  "/patent": "Patent",
 };
 
 export function Header() {

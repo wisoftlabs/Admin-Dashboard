@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { getAwards } from "@/lib/api/award";
+import { getAward, getAwards } from "@/lib/api/award";
 import { type Award } from "@/lib/schemas/award/award";
 
 export const awardQueryOptions = {
@@ -11,5 +11,10 @@ export const awardQueryOptions = {
     queryOptions({
       queryKey: [...awardQueryOptions.listKey()],
       queryFn: () => getAwards(),
+    }),
+  detail: (id: Award["id"]) =>
+    queryOptions({
+      queryKey: [...awardQueryOptions.detailKey(id)],
+      queryFn: () => getAward(id),
     }),
 };

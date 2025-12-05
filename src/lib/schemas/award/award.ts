@@ -5,6 +5,11 @@ import { OrientationSchema } from "@/lib/schemas/shared/orientation";
 
 export const AwardSchema = z.object({
   id: z.uuid(),
+  title: z.string(),
+  awardee: z.string(),
+  competition: z.string(),
+  summary: z.string(),
+  date: z.coerce.date<Date>(),
   year: z.number(),
   image_url: z.string(),
   image_type: ImageTypeSchema,

@@ -1,6 +1,5 @@
 import type { ComponentProps } from "react";
 
-import { AwardCreateForm } from "@/components/award/AwardCreateForm";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +8,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+import { AwardCreateForm } from "./AwardCreateForm";
 
 type AwardCreateDialogProps = {
   onCreated: () => void;

@@ -1,12 +1,8 @@
 import { useState } from "react";
 
-import { Trash2 } from "lucide-react";
-
-import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
-import { ImageLightbox } from "@/components/shared/dialog/ImageLightBox";
-import { Button } from "@/components/ui/button";
+import { AwardUpdateDialog } from "@/components/award/UpdateDialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useDeleteAwardMutation } from "@/hooks/award/mutations";
+import { useDialog } from "@/hooks/shared/use-dialog";
 import { type AwardPreview } from "@/lib/schemas/award/award-preview";
 import { cn } from "@/lib/utils";
 
@@ -16,24 +12,28 @@ type AwardCardProps = {
 
 export function AwardCard({ award }: AwardCardProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const { mutate: deleteAward } = useDeleteAwardMutation(award.id);
-
-  const handleDelete = () => {
-    deleteAward();
-  };
+  const { open, onOpenChange, openDialog, closeDialog } = useDialog();
 
   return (
-    <div
-      className={cn(
-        "group relative overflow-hidden rounded-lg bg-muted",
-        {
-          "aspect-[4/3]": award.orientation === "landscape",
-          "aspect-[3/4]": award.orientation === "portrait",
-        },
-      )}
-    >
-      {isLoading && <Skeleton className="absolute inset-0 h-full w-full animate-pulse" />}
-      <ImageLightbox imageSrc={award.image_url}>
+    <>
+      <AwardUpdateDialog
+        awardId={award.id}
+        open={open}
+        onOpenChange={onOpenChange}
+        onDeleted={closeDialog}
+        onSuccess={closeDialog}
+      />
+      <div
+        className={cn(
+          "group relative overflow-hidden rounded-lg bg-muted cursor-pointer",
+          {
+            "aspect-[4/3]": award.orientation === "landscape",
+            "aspect-[3/4]": award.orientation === "portrait",
+          },
+        )}
+        onClick={openDialog}
+      >
+        {isLoading && <Skeleton className="absolute inset-0 h-full w-full animate-pulse" />}
         <img
           src={award.image_url}
           alt={`Award ${award.year}`}
@@ -44,15 +44,12 @@ export function AwardCard({ award }: AwardCardProps) {
           )}
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      </ImageLightbox>
-      <div className="absolute right-2 top-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <ConfirmDialog title="수상내역 삭제" onConfirm={handleDelete}>
-          <Button variant="destructive" size="icon-sm">
-            <Trash2 />
-          </Button>
-        </ConfirmDialog>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex flex-col justify-end p-4">
+          <p className="text-sm font-medium text-white line-clamp-1 drop-shadow-md">
+            {award.title}
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
