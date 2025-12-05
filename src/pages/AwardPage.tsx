@@ -26,13 +26,12 @@ export function AwardPage() {
     <div className="space-y-8">
       <div className="border-b pb-6">
         <div className="flex justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground">
-              전체
-              {Object.values(groupedAwards).flat().length}
-              개
-            </p>
-          </div>
+          <p className="text-sm text-muted-foreground">
+            전체
+            {" "}
+            {Object.values(groupedAwards).flat().length}
+            개
+          </p>
 
           <AwardCreateDialog
             open={open}

@@ -38,28 +38,28 @@ export function NewsPage() {
   }
 
   return (
-    <div className="flex flex-col h-full pt-4 overflow-hidden">
-      <div className="flex justify-between items-center mb-6 shrink-0">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">공지사항 관리</h1>
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="border-b pb-6">
+        <div className="flex justify-between">
           <p className="text-sm text-muted-foreground">
+            전체
+            {" "}
             {news.length}
             개 등록됨
           </p>
+          <NewsCreateDialog
+            open={open}
+            onOpenChange={onOpenChange}
+            onCreated={closeDialog}
+          >
+            <Button>
+              <PlusIcon />
+            </Button>
+          </NewsCreateDialog>
         </div>
-        <NewsCreateDialog
-          open={open}
-          onOpenChange={onOpenChange}
-          onCreated={closeDialog}
-        >
-          <Button>
-            <PlusIcon className="mr-2" />
-            새 공지사항
-          </Button>
-        </NewsCreateDialog>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 flex-1 min-h-0 pb-4">
+      <div className="grid md:grid-cols-2 gap-4 flex-1 min-h-0 pt-4">
         <NewsList news={pinnedNews} title="고정된 공지사항" />
         <NewsList news={otherNews} title="일반 공지사항" />
       </div>
