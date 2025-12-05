@@ -24,7 +24,7 @@ export function ImageFileFormField<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="min-h-24">
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <FileUpload
@@ -35,42 +35,45 @@ export function ImageFileFormField<T extends FieldValues>({
               accept="image/*"
               maxFiles={1}
               onFileReject={(_, message) => onError(message)}
-              className="space-y-4"
+              className="space-y-2"
             >
-              <FileUploadDropzone className="group flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-muted-foreground/25 bg-muted/5 py-8 text-center transition-colors hover:bg-muted/20">
-                <div className="rounded-full bg-background p-3 shadow-sm ring-1 ring-border">
-                  <CloudUploadIcon className="size-6 text-muted-foreground transition-colors group-hover:text-primary" />
-                </div>
+              {!field.value && (
+                <FileUploadDropzone className="group flex flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-muted-foreground/25 bg-muted/5 py-2 text-center transition-colors hover:bg-muted/20">
+                  <div className="rounded-full bg-background p-1.5 shadow-sm ring-1 ring-border">
+                    <CloudUploadIcon className="size-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                  </div>
 
-                <div className="space-y-1">
-                  <p className="text-sm font-medium text-foreground">
-                    이미지를 드래그하거나
-                    {" "}
-                    <FileUploadTrigger asChild>
-                      <span className="cursor-pointer font-semibold text-primary underline underline-offset-4 hover:text-primary/80">
-                        파일 선택
+                  <div className="space-y-1">
+                    <p className="text-xs font-medium text-foreground">
+                      이미지를 드래그하거나
+                      {" "}
+                      <FileUploadTrigger asChild>
+                        <span className="cursor-pointer font-semibold text-primary underline underline-offset-4 hover:text-primary/80">
+                          파일 선택
+                        </span>
+                      </FileUploadTrigger>
+                      <span className="text-xs text-muted-foreground">
+                        {" "}
+                        (JPG, PNG)
                       </span>
-                    </FileUploadTrigger>
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    JPG, PNG
-                  </p>
-                </div>
-              </FileUploadDropzone>
+                    </p>
+                  </div>
+                </FileUploadDropzone>
+              )}
 
               <FileUploadList>
                 {(field.value ? [field.value] : []).map((file, index) => (
                   <FileUploadItem
                     key={index}
                     value={file}
-                    className="relative flex items-center gap-3 rounded-lg border bg-card p-3 shadow-sm"
+                    className="relative flex items-center gap-1.5 rounded-lg border bg-card p-3 shadow-sm"
                   >
                     <div className="relative size-10 shrink-0 overflow-hidden rounded-md border">
                       <FileUploadItemPreview className="size-full object-cover" />
                     </div>
 
                     <div className="flex flex-1 flex-col gap-0.5 overflow-hidden">
-                      <FileUploadItemMetadata className="text-sm font-medium truncate" />
+                      <FileUploadItemMetadata className="text-xs font-medium truncate" size="sm" />
                     </div>
 
                     <FileUploadItemDelete asChild>

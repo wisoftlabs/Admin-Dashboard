@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-import { PaperCreateForm } from "@/components/paper/PaperCreateForm";
+import { PaperCreateForm } from "@/components/paper/CreateDialog/PaperCreateForm";
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ export function PaperCreateDialog({ open, onOpenChange, onCreated, children }: P
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="h-[90vh] !max-w-fit min-w-1/2 w-[90vw] flex flex-col">
         <DialogHeader>
           <DialogTitle>논문 추가</DialogTitle>
           <DialogDescription className="sr-only">논문을 추가합니다.</DialogDescription>

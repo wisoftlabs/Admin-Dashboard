@@ -1,7 +1,7 @@
 import { groupBy } from "es-toolkit";
 import { PlusIcon } from "lucide-react";
 
-import { PaperCreateDialog } from "@/components/paper/PaperCreateDialog";
+import { PaperCreateDialog } from "@/components/paper/CreateDialog/PaperCreateDialog";
 import { PaperYearSection } from "@/components/paper/PaperYearSection";
 import { ErrorView } from "@/components/shared/error-view";
 import { Button } from "@/components/ui/button";
@@ -27,9 +27,9 @@ export function PaperPage() {
       <div className="border-b pb-6">
         <div className="flex justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">논문</h1>
             <p className="text-sm text-muted-foreground">
               전체
+              {" "}
               {Object.values(groupedPapers).flat().length}
               개
             </p>

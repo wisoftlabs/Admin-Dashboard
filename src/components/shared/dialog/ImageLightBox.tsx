@@ -20,6 +20,8 @@ export function ImageLightbox({
   children,
   className,
 }: ImageLightboxProps) {
+  console.log("ImageLightBox", imageSrc);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
