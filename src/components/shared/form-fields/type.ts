@@ -6,4 +6,5 @@ export type BaseFieldProps<T extends FieldValues> = {
   label: string;
   placeholder?: string;
   disabled?: boolean;
+  className?: string;
 };

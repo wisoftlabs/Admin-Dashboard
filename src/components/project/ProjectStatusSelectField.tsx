@@ -1,19 +1,23 @@
 import type { FieldValues } from "react-hook-form";
 
+import { ProjectStatusIcon } from "@/components/project/ProjectStatusIcon";
 import type { BaseFieldProps } from "@/components/shared/form-fields/type";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { generateComingYears } from "@/lib/time";
+import { PROJECT_STATUS, type ProjectStatus } from "@/lib/schemas/project/project-status";
 
-export function YearSelectField<T extends FieldValues>({
+const STATUS_DISPLAY: Record<ProjectStatus, string> = {
+  progress: "진행중",
+  done: "완료",
+};
+
+export function ProjectStatusSelectField<T extends FieldValues>({
   control,
   name,
   label,
   placeholder,
   disabled,
 }: BaseFieldProps<T>) {
-  const years = generateComingYears();
-
   return (
     <FormField
       control={control}
@@ -23,8 +27,8 @@ export function YearSelectField<T extends FieldValues>({
           <FormLabel>{label}</FormLabel>
           <Select
             disabled={disabled}
-            onValueChange={val => field.onChange(Number(val))}
-            value={field.value?.toString()}
+            onValueChange={val => field.onChange(val)}
+            value={field.value}
           >
             <FormControl>
               <SelectTrigger className="w-full select-none">
@@ -32,10 +36,10 @@ export function YearSelectField<T extends FieldValues>({
               </SelectTrigger>
             </FormControl>
             <SelectContent className="min-w-0 w-[var(--radix-select-trigger-width)]">
-              {years.map(year => (
-                <SelectItem key={year} value={year.toString()}>
-                  {year}
-                  년
+              {PROJECT_STATUS.map(status => (
+                <SelectItem key={status} value={status}>
+                  <ProjectStatusIcon status={status} />
+                  {STATUS_DISPLAY[status]}
                 </SelectItem>
               ))}
             </SelectContent>
