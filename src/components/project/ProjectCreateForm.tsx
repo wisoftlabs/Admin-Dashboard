@@ -11,6 +11,7 @@ import {
   type ProjectCreateFormData,
   ProjectCreateFormDataSchema,
 } from "@/lib/schemas/project/project-create";
+import { PROJECT_STATUS } from "@/lib/schemas/project/project-status";
 import { getCurrentYear } from "@/lib/time";
 
 type ProjectCreateFormProps = {
@@ -21,12 +22,13 @@ export function ProjectCreateForm({ onSuccess }: ProjectCreateFormProps) {
   const form = useForm<ProjectCreateFormData>({
     resolver: zodResolver(ProjectCreateFormDataSchema),
     defaultValues: {
-      name: "",
-      team_name: "",
-      description: "",
       year: getCurrentYear(),
+      status: PROJECT_STATUS[0],
+      name: "",
+      description: "",
       members: [],
       thumbnail: undefined,
+      link: "",
     },
   });
 
