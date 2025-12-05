@@ -1,0 +1,1 @@
+export { PatentUpdateDialog } from "./PatentUpdateDialog";
