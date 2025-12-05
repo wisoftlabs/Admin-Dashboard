@@ -27,7 +27,7 @@ export function YearSelectField<T extends FieldValues>({
             value={field.value?.toString()}
           >
             <FormControl>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full select-none">
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>

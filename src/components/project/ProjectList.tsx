@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { ProjectStatusIcon } from "@/components/project/ProjectStatusIcon";
 import { ErrorView } from "@/components/shared/error-view";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import {
@@ -151,11 +152,18 @@ function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps)
       </ItemMedia>
       <ItemContent className="flex flex-col justify-start py-0.5 gap-1 min-w-0">
         <ItemTitle className="text-base font-semibold leading-none truncate">
+          <ProjectStatusIcon status={project.status} />
           {project.name}
         </ItemTitle>
-        <ItemDescription className="line-clamp-2 text-sm text-muted-foreground break-keep">
-          {project.description}
-        </ItemDescription>
+        <div className="flex flex-col justify-between h-full">
+          <ItemDescription className="line-clamp-2 text-sm text-muted-foreground break-keep">
+            {project.description}
+          </ItemDescription>
+          <ItemDescription>
+            {project.year}
+            년
+          </ItemDescription>
+        </div>
       </ItemContent>
     </Item>
   );
