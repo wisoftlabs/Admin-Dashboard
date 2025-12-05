@@ -3,8 +3,8 @@ import { getImageOrientation, getImageResolutions } from "@/lib/image";
 import type { Award } from "@/lib/schemas/award/award";
 import type { AwardCreateFormData } from "@/lib/schemas/award/award-create-form-data";
 import type { AwardPreview } from "@/lib/schemas/award/award-preview";
-import { ImageTypeSchema } from "@/lib/schemas/common/image-type";
-import { type Orientation } from "@/lib/schemas/common/orientation";
+import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
+import { type Orientation } from "@/lib/schemas/shared/orientation";
 
 export async function getAwards(): Promise<AwardPreview[]> {
   return await apiClient<AwardPreview[]>("awards");

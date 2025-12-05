@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ImageTypeSchema } from "@/lib/schemas/common/image-type";
+import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
 
 export const PaperSchema = z.object({
   id: z.uuid(),

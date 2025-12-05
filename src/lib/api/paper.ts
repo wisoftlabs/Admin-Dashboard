@@ -1,8 +1,8 @@
 import { apiClient } from "@/lib/api-client";
-import { ImageTypeSchema } from "@/lib/schemas/common/image-type";
 import type { Paper } from "@/lib/schemas/paper/paper";
 import type { PaperCreateFormData } from "@/lib/schemas/paper/paper-create-form-data";
 import type { PaperPreview } from "@/lib/schemas/paper/paper-preview";
+import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
 
 export async function getPapers(): Promise<PaperPreview[]> {
   return await apiClient<PaperPreview[]>("papers");

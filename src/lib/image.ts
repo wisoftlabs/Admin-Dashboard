@@ -1,4 +1,4 @@
-import { type Orientation } from "@/lib/schemas/common/orientation";
+import { type Orientation } from "@/lib/schemas/shared/orientation";
 
 type Size = { width: number; height: number };
 

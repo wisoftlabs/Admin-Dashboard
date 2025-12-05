@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ThumbnailFileSchema } from "@/lib/schemas/common/thumbnail";
+import { ThumbnailFileSchema } from "@/lib/schemas/shared/thumbnail";
 
 import { ProjectCreateFormDataSchema } from "./project-create";
 

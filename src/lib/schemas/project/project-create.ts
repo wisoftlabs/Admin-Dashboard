@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { ThumbnailFileSchema } from "@/lib/schemas/common/thumbnail";
 import { ProjectSchema } from "@/lib/schemas/project/project";
+import { ThumbnailFileSchema } from "@/lib/schemas/shared/thumbnail";
 
 export const ProjectCreateFormDataSchema = ProjectSchema
   .omit({
