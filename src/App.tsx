@@ -9,6 +9,7 @@ import { LoginPage } from "@/pages/LoginPage";
 import { NewsPage } from "@/pages/NewsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { PaperPage } from "@/pages/PaperPage";
+import { PatentPage } from "@/pages/PatentPage";
 import { ProjectPage } from "@/pages/ProjectPage";
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path="project" element={<ProjectPage />} />
                 <Route path="paper" element={<PaperPage />} />
                 <Route path="award" element={<AwardPage />} />
+                <Route path="patent" element={<PatentPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             )

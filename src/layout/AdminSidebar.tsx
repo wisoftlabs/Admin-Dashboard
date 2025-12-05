@@ -7,7 +7,7 @@ import {
   FileText,
   FolderKanban,
   Home,
-  ImagesIcon,
+  ImagesIcon, LightbulbIcon,
   NewspaperIcon,
 } from "lucide-react";
 
@@ -56,6 +56,11 @@ const sidebarNavItems: Array<AdminSidebarItemData> = [
     title: "Award",
     icon: <Award />,
     href: "/award",
+  },
+  {
+    title: "Patent",
+    icon: <LightbulbIcon />,
+    href: "/patent",
   },
 ];
 
