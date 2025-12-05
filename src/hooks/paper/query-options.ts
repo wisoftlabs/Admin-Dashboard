@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { getPapers } from "@/lib/api/paper";
+import { getPaper, getPapers } from "@/lib/api/paper";
 import { type Paper } from "@/lib/schemas/paper/paper";
 
 export const paperQueryOptions = {
@@ -11,5 +11,10 @@ export const paperQueryOptions = {
     queryOptions({
       queryKey: [...paperQueryOptions.listKey()],
       queryFn: () => getPapers(),
+    }),
+  detail: (id: Paper["id"]) =>
+    queryOptions({
+      queryKey: [...paperQueryOptions.detailKey(id)],
+      queryFn: () => getPaper(id),
     }),
 };
