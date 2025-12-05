@@ -11,7 +11,7 @@ import {
   type PatentCreateFormData,
   PatentCreateFormDataSchema,
 } from "@/lib/schemas/patent/patent-create-form-data";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 type PatentCreateFormProps = {
   onSuccess?: () => void;

@@ -4,7 +4,7 @@ import { AwardCard } from "@/components/award/AwardCard";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import type { AwardPreview } from "@/lib/schemas/award/award-preview";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 type AwardYearSectionProps = {
   year: number;

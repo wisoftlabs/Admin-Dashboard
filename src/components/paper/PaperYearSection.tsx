@@ -4,7 +4,7 @@ import { PaperCard } from "@/components/paper/PaperCard";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import type { PaperPreview } from "@/lib/schemas/paper/paper-preview";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 type PaperYearSectionProps = {
   year: number;

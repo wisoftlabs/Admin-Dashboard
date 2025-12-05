@@ -11,7 +11,7 @@ import {
   type PaperCreateFormData,
   PaperCreateFormDataSchema,
 } from "@/lib/schemas/paper/paper-create-form-data";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 type PaperCreateFormProps = {
   onSuccess?: () => void;

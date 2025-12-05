@@ -4,7 +4,7 @@ import { PatentCard } from "@/components/patent/PatentCard";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import type { PatentPreview } from "@/lib/schemas/patent/patent-preview";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 type PatentYearSectionProps = {
   year: number;

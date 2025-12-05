@@ -10,7 +10,7 @@ import {
   type AwardCreateFormData,
   AwardCreateFormDataSchema,
 } from "@/lib/schemas/award/award-create-form-data";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 import { AwardCreateFormFields } from "./AwardCreateFormFields";
 

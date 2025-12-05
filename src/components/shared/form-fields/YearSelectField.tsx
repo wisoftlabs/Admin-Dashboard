@@ -3,7 +3,7 @@ import type { FieldValues } from "react-hook-form";
 import type { BaseFieldProps } from "@/components/shared/form-fields/type";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { generateComingYears } from "@/lib/time";
+import { generateComingYears } from "@/lib/utils/year";
 
 export function YearSelectField<T extends FieldValues>({
   control,

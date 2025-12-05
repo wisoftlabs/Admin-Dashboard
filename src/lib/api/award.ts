@@ -1,13 +1,13 @@
 import { format } from "date-fns";
 
 import { apiClient } from "@/lib/api-client";
-import { getImageOrientation, getImageResolutions } from "@/lib/image";
 import type { Award } from "@/lib/schemas/award/award";
 import type { AwardCreateFormData } from "@/lib/schemas/award/award-create-form-data";
 import type { AwardPreview } from "@/lib/schemas/award/award-preview";
 import { type AwardUpdateFormData } from "@/lib/schemas/award/award-update-form-data";
 import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
 import { type Orientation } from "@/lib/schemas/shared/orientation";
+import { getImageOrientation, getImageResolutions } from "@/lib/utils/image";
 
 export async function getAwards(): Promise<AwardPreview[]> {
   return await apiClient<AwardPreview[]>("awards");

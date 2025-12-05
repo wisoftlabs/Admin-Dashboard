@@ -12,7 +12,7 @@ import {
   ProjectCreateFormDataSchema,
 } from "@/lib/schemas/project/project-create";
 import { PROJECT_STATUS } from "@/lib/schemas/project/project-status";
-import { getCurrentYear } from "@/lib/time";
+import { getCurrentYear } from "@/lib/utils/year";
 
 type ProjectCreateFormProps = {
   onSuccess: () => void;

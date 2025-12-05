@@ -10,8 +10,8 @@ import {
   useToggleNewsPinMutation,
 } from "@/hooks/news/mutations";
 import { useDialog } from "@/hooks/shared/use-dialog";
-import { formatDate } from "@/lib/date";
 import type { NewsPreview } from "@/lib/schemas/news/news-preview";
+import { formatDate } from "@/lib/utils/date";
 
 type NewsTableRowProps = {
   news: NewsPreview;
