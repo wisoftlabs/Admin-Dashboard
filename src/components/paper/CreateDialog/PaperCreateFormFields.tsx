@@ -30,7 +30,7 @@ export function PaperCreateFormFields<T extends PaperCreateFormData>({
       />
       <TextAreaFormField
         control={form.control}
-        name={"abstract" as Path<T>}
+        name={"paper_abstract" as Path<T>}
         label="초록"
       />
       <InputFormField

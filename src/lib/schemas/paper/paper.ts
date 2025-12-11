@@ -6,7 +6,7 @@ export const PaperSchema = z.object({
   id: z.uuid(),
   title: z.string(),
   authors: z.string(),
-  abstract: z.string(),
+  paper_abstract: z.string(),
   conference: z.string(),
   journal: z.string(),
   publication_date: z.coerce.date<Date>(),
