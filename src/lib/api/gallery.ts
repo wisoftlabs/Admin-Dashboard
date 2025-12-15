@@ -50,8 +50,9 @@ export function updateGalleryImage(
   });
 }
 
-export function getGallerySlides(): Promise<GallerySlide[]> {
-  return apiClient<GallerySlide[]>("gallery_slides");
+export async function getGallerySlides(): Promise<GallerySlide[]> {
+  const slides = await apiClient<GallerySlide[]>("gallery_slides");
+  return slides.sort((a, b) => a.order - b.order);
 }
 
 export async function addImagesToSlides(
