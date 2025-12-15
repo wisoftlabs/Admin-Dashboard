@@ -49,13 +49,13 @@ export function GalleryYearSection({
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger className="w-full">
           <div
-            className="flex items-center justify-between px-6 pt-6 pb-4 hover:bg-muted/50 transition-colors"
+            className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
           >
-            <div className="flex items-center gap-3">
-              <h3 className="text-lg font-bold">{year}</h3>
+            <div className="flex items-center gap-2">
+              <h3 className="font-semibold">{year}</h3>
               <Badge
                 variant="secondary"
-                className="bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white"
+                className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs"
               >
                 {images.length}
                 {" "}
@@ -64,11 +64,11 @@ export function GalleryYearSection({
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="flex gap-1 bg-muted p-1 rounded-lg" onClick={e => e.stopPropagation()}>
+              <div className="flex gap-0.5 bg-muted p-0.5 rounded-md" onClick={e => e.stopPropagation()}>
                 <Button
                   size="sm"
                   variant={sortType === "date" ? "secondary" : "ghost"}
-                  className="h-8 gap-1 text-xs"
+                  className="h-7 gap-1 text-xs px-2"
                   onClick={() => setSortType("date")}
                 >
                   <CalendarIcon className="w-3 h-3" />
@@ -77,7 +77,7 @@ export function GalleryYearSection({
                 <Button
                   size="sm"
                   variant={sortType === "name" ? "secondary" : "ghost"}
-                  className="h-8 gap-1 text-xs"
+                  className="h-7 gap-1 text-xs px-2"
                   onClick={() => setSortType("name")}
                 >
                   <SortAsc className="w-3 h-3" />
@@ -87,7 +87,7 @@ export function GalleryYearSection({
 
               <ChevronDown
                 className={cn(
-                  "w-5 h-5 text-muted-foreground transition-transform",
+                  "w-4 h-4 text-muted-foreground transition-transform",
                   isOpen && "transform rotate-180",
                 )}
               />
@@ -96,15 +96,15 @@ export function GalleryYearSection({
         </CollapsibleTrigger>
 
         <CollapsibleContent>
-          <div className="px-6 pb-4 border-t pt-4">
-            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-7 gap-3">
+          <div className="px-4 pb-3 border-t pt-2">
+            <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 xl:grid-cols-10 gap-2">
               {sortedImages.map((image) => {
                 const isSelected = selectedImages.has(image.id);
                 return (
                   <div
                     key={image.id}
                     className={cn(
-                      "relative aspect-square rounded-lg overflow-hidden border-2 cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg",
+                      "relative aspect-square rounded-md overflow-hidden border-2 cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-md",
                       isSelected
                         ? "border-primary shadow-md shadow-primary/20"
                         : "border-transparent bg-muted",
@@ -112,7 +112,7 @@ export function GalleryYearSection({
                     onClick={() => onImageSelect(image.id)}
                   >
                     <div
-                      className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-semibold"
+                      className="w-full h-full flex items-center justify-center bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-semibold text-xs"
                     >
                       {image.imageUrl
                         ? (
@@ -127,13 +127,13 @@ export function GalleryYearSection({
                           )}
                     </div>
                     <div
-                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-2 text-xs truncate"
+                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-1.5 text-xs truncate"
                     >
                       {image.title}
                     </div>
                     <div
                       className={cn(
-                        "absolute top-2 right-2 w-6 h-6 rounded border-2 flex items-center justify-center transition-all",
+                        "absolute top-1.5 right-1.5 w-5 h-5 rounded border-2 flex items-center justify-center transition-all",
                         isSelected
                           ? "bg-primary border-primary"
                           : "bg-white border-border",
@@ -141,7 +141,7 @@ export function GalleryYearSection({
                     >
                       {isSelected && (
                         <svg
-                          className="w-4 h-4 text-white"
+                          className="w-3 h-3 text-white"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >

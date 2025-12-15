@@ -102,21 +102,21 @@ export function GalleryPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
-        <Skeleton className="h-12 w-full" />
-        <Skeleton className="h-64 w-full" />
-        <Skeleton className="h-64 w-full" />
+      <div className="space-y-4">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-48 w-full" />
+        <Skeleton className="h-48 w-full" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Action Bar */}
       <div className="flex items-center justify-between">
         <div className="flex-1" />
         <ImageUploadDialog onUpload={handleUpload}>
-          <Button disabled={uploadMutation.isPending}>
+          <Button disabled={uploadMutation.isPending} size="sm">
             <PlusIcon className="w-4 h-4" />
             {uploadMutation.isPending ? "업로드 중..." : "이미지 업로드"}
           </Button>
@@ -131,9 +131,9 @@ export function GalleryPage() {
 
       {/* Selected Images Action Bar */}
       {selectedImages.size > 0 && (
-        <Card className="p-4">
+        <Card className="p-3">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-semibold text-primary">
+            <div className="text-xs font-semibold text-primary">
               {selectedImages.size}
               개 선택됨
             </div>
@@ -143,9 +143,9 @@ export function GalleryPage() {
                   variant="default"
                   size="sm"
                   onClick={handleAddToSlideList}
-                  className="bg-gradient-to-r from-[#43e97b] to-[#38f9d7]"
+                  className="bg-gradient-to-r from-[#43e97b] to-[#38f9d7] text-xs h-8"
                 >
-                  <PlusIcon className="w-4 h-4" />
+                  <PlusIcon className="w-3 h-3" />
                   Photo Slides에 추가
                 </Button>
               )}
@@ -154,11 +154,12 @@ export function GalleryPage() {
                   variant="destructive"
                   size="sm"
                   onClick={handleRemoveFromSlideList}
+                  className="text-xs h-8"
                 >
                   Photo Slides에서 제거
                 </Button>
               )}
-              <Button variant="outline" size="sm" onClick={handleClearSelection}>
+              <Button variant="outline" size="sm" onClick={handleClearSelection} className="text-xs h-8">
                 선택 해제
               </Button>
             </div>
@@ -167,10 +168,10 @@ export function GalleryPage() {
       )}
 
       {/* Gallery Content */}
-      <div className="space-y-4 mt-8">
+      <div className="space-y-3 mt-6">
         {years.length === 0
           ? (
-              <div className="text-center py-20 text-muted-foreground">
+              <div className="text-center py-16 text-muted-foreground">
                 <p>등록된 이미지가 없습니다.</p>
                 <p className="text-sm mt-2">이미지 업로드 버튼을 클릭하여 시작하세요.</p>
               </div>
