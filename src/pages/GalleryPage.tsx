@@ -113,14 +113,20 @@ export function GalleryPage() {
   return (
     <div className="space-y-4">
       {/* Action Bar */}
-      <div className="flex items-center justify-between">
-        <div className="flex-1" />
-        <ImageUploadDialog onUpload={handleUpload}>
-          <Button disabled={uploadMutation.isPending} size="sm">
-            <PlusIcon className="w-4 h-4" />
-            {uploadMutation.isPending ? "업로드 중..." : "이미지 업로드"}
-          </Button>
-        </ImageUploadDialog>
+      <div className="border-b pb-6">
+        <div className="flex justify-between">
+          <p className="text-sm text-muted-foreground">
+            전체
+            {" "}
+            {images.length}
+            개
+          </p>
+          <ImageUploadDialog onUpload={handleUpload}>
+            <Button disabled={uploadMutation.isPending}>
+              <PlusIcon />
+            </Button>
+          </ImageUploadDialog>
+        </div>
       </div>
 
       {/* Slide List Section */}
