@@ -13,12 +13,19 @@ await db.read();
 const wrapper = new App();
 
 wrapper.use((req, _res, next) => {
-  if (req.url?.startsWith("/gallery/images")) {
-    req.url = req.url.replace("/gallery/images", "/images");
+  const routeMap: Record<string, string> = {
+    "/gallery/images": "/images",
+    "/gallery/slides": "/slides",
+    "/home/stats": "/stats",
+  };
+
+  for (const [from, to] of Object.entries(routeMap)) {
+    if (req.url?.startsWith(from)) {
+      req.url = req.url.replace(from, to);
+      break;
+    }
   }
-  else if (req.url?.startsWith("/gallery/slides")) {
-    req.url = req.url.replace("/gallery/slides", "/slides");
-  }
+
   next?.();
 });
 
