@@ -50,7 +50,7 @@ export function GalleryYearSection({
   return (
     <Card className="overflow-hidden py-0">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger className="w-full">
+        <CollapsibleTrigger className="w-full" asChild>
           <div
             className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
           >
