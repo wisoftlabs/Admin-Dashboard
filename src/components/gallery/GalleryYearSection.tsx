@@ -63,7 +63,7 @@ export function GalleryYearSection({
               >
                 {images.length}
                 {" "}
-                images
+                개
               </Badge>
             </div>
 
