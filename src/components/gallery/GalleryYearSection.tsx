@@ -5,6 +5,7 @@ import { CalendarIcon, ChevronDown, SortAsc, Trash2 } from "lucide-react";
 import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group";
 import { Card } from "@/components/ui/card";
 import {
   Collapsible,
@@ -58,7 +59,7 @@ export function GalleryYearSection({
               <h3 className="font-semibold">{year}</h3>
               <Badge
                 variant="secondary"
-                className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs"
+                className="text-xs"
               >
                 {images.length}
                 {" "}
@@ -67,26 +68,27 @@ export function GalleryYearSection({
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="flex gap-0.5 bg-muted p-0.5 rounded-md" onClick={e => e.stopPropagation()}>
+              <ButtonGroup onClick={e => e.stopPropagation()}>
                 <Button
                   size="sm"
-                  variant={sortType === "date" ? "secondary" : "ghost"}
+                  variant={sortType === "date" ? "default" : "secondary"}
                   className="h-7 gap-1 text-xs px-2"
                   onClick={() => setSortType("date")}
                 >
                   <CalendarIcon className="w-3 h-3" />
                   날짜순
                 </Button>
+                <ButtonGroupSeparator />
                 <Button
                   size="sm"
-                  variant={sortType === "name" ? "secondary" : "ghost"}
+                  variant={sortType === "name" ? "default" : "secondary"}
                   className="h-7 gap-1 text-xs px-2"
                   onClick={() => setSortType("name")}
                 >
                   <SortAsc className="w-3 h-3" />
                   이름순
                 </Button>
-              </div>
+              </ButtonGroup>
 
               <ChevronDown
                 className={cn(
