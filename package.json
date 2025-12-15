@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "preview": "vite preview",
-    "watch:json-server": "tsx server.ts",
+    "watch:json-server": "bun run server.ts",
     "watch:vite": "vite"
   },
   "dependencies": {
