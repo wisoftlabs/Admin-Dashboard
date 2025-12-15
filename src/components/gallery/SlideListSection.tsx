@@ -27,16 +27,16 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Card className="mb-6 overflow-hidden">
+    <Card className="mb-3 overflow-hidden">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger className="w-full">
-          <div className="flex items-center justify-between px-6 pt-6 pb-4 hover:bg-muted/50 transition-colors">
-            <div className="flex items-center gap-3">
-              <Images className="w-5 h-5 text-[#43e97b]" />
-              <h3 className="text-lg font-bold">Photo Slides 관리</h3>
+          <div className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-2">
+              <Images className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+              <h3 className="font-semibold">Photo Slides 관리</h3>
               <Badge
                 variant="secondary"
-                className="bg-gradient-to-r from-[#43e97b] to-[#38f9d7] text-white"
+                className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs"
               >
                 {slides.length}
                 개
@@ -44,7 +44,7 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
             </div>
             <ChevronDown
               className={cn(
-                "w-5 h-5 text-muted-foreground transition-transform",
+                "w-4 h-4 text-muted-foreground transition-transform",
                 isOpen && "transform rotate-180",
               )}
             />
@@ -52,25 +52,25 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
         </CollapsibleTrigger>
 
         <CollapsibleContent>
-          <div className="px-6 pb-6 border-t pt-4">
+          <div className="px-4 pb-3 border-t pt-2">
             {slides.length === 0
               ? (
-                  <div className="text-center py-10 text-muted-foreground">
-                    <Images className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p>Photo Slides가 비어있습니다</p>
-                    <p className="text-sm mt-2">
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Images className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                    <p className="text-sm">Photo Slides가 비어있습니다</p>
+                    <p className="text-xs mt-1">
                       갤러리에서 이미지를 선택하고 "Photo Slides에 추가" 버튼을 클릭하세요
                     </p>
                   </div>
                 )
               : (
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3">
+                  <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2">
                     {slides.map(slide => (
                       <div
                         key={slide.id}
-                        className="relative aspect-square rounded-lg overflow-hidden border bg-muted group shadow-sm hover:shadow-md transition-shadow"
+                        className="relative aspect-square rounded-md overflow-hidden border bg-muted group shadow-sm hover:shadow-md transition-shadow"
                       >
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-semibold">
+                        <div className="w-full h-full flex items-center justify-center bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-semibold text-xs">
                           {slide.imageUrl
                             ? (
                                 <img
@@ -83,7 +83,7 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
                                 "IMG"
                               )}
                         </div>
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-2">
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-1.5">
                           <p className="font-medium text-xs line-clamp-1">
                             {slide.title || "제목 없음"}
                           </p>
@@ -91,7 +91,7 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
                         <Button
                           size="icon"
                           variant="destructive"
-                          className="absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                          className="absolute top-1.5 right-1.5 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                           onClick={() => onRemove(slide.id)}
                         >
                           <XIcon className="w-3 h-3" />
