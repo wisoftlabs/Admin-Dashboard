@@ -17,6 +17,7 @@ wrapper.use((req, _res, next) => {
     "/gallery/images": "/images",
     "/gallery/slides": "/slides",
     "/home/stats": "/stats",
+    "/home/calendar": "/calendar",
   };
 
   for (const [from, to] of Object.entries(routeMap)) {
