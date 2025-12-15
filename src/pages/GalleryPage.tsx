@@ -1,17 +1,19 @@
 import { useState } from "react";
 
 import { groupBy } from "es-toolkit";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, Trash2 } from "lucide-react";
 
 import { GalleryYearSection } from "@/components/gallery/GalleryYearSection";
 import { ImageUploadDialog, type UploadFormData } from "@/components/gallery/ImageUploadDialog";
 import { SlideListSection } from "@/components/gallery/SlideListSection";
+import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { ErrorView } from "@/components/shared/error-view";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   useAddImagesToSlidesMutation,
+  useDeleteGalleryImagesMutation,
   useDeleteSlidesMutation,
   useUploadGalleryImagesMutation,
 } from "@/hooks/gallery/mutations";
@@ -23,6 +25,7 @@ export function GalleryPage() {
   const uploadMutation = useUploadGalleryImagesMutation();
   const addToSlidesMutation = useAddImagesToSlidesMutation();
   const removeSlideMutation = useDeleteSlidesMutation();
+  const deleteImagesMutation = useDeleteGalleryImagesMutation();
 
   const [selectedImages, setSelectedImages] = useState<Set<string>>(new Set());
 
@@ -88,6 +91,12 @@ export function GalleryPage() {
     await uploadMutation.mutateAsync(data.files);
   };
 
+  const handleDeleteSelectedImages = async () => {
+    const imageIdsToDelete = Array.from(selectedImages);
+    await deleteImagesMutation.mutateAsync(imageIdsToDelete);
+    setSelectedImages(new Set());
+  };
+
   const allSelectedInSlideList = selectedImages.size > 0
     && Array.from(selectedImages).every(id => slideImageIds.has(id));
   const someSelectedInSlideList = selectedImages.size > 0
@@ -146,10 +155,10 @@ export function GalleryPage() {
             <div className="flex gap-2">
               {!allSelectedInSlideList && (
                 <Button
-                  variant="default"
+                  variant="secondary"
                   size="sm"
                   onClick={handleAddToSlideList}
-                  className="bg-gradient-to-r from-[#43e97b] to-[#38f9d7] text-xs h-8"
+                  className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs h-8"
                 >
                   <PlusIcon className="w-3 h-3" />
                   Photo Slides에 추가
@@ -165,6 +174,19 @@ export function GalleryPage() {
                   Photo Slides에서 제거
                 </Button>
               )}
+              <ConfirmDialog
+                title={`선택한 ${selectedImages.size}개의 이미지를 삭제하시겠습니까?`}
+                onConfirm={handleDeleteSelectedImages}
+              >
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="text-xs h-8"
+                >
+                  <Trash2 className="w-3 h-3" />
+                  선택 삭제
+                </Button>
+              </ConfirmDialog>
               <Button variant="outline" size="sm" onClick={handleClearSelection} className="text-xs h-8">
                 선택 해제
               </Button>
