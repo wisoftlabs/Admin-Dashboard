@@ -163,11 +163,11 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
         <CollapsibleTrigger className="w-full">
           <div className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-2">
-              <Images className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+              <Images className="w-4 h-4" />
               <h3 className="font-semibold">Photo Slides 관리</h3>
               <Badge
                 variant="secondary"
-                className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs"
+                className="text-xs"
               >
                 {slides.length}
                 개
