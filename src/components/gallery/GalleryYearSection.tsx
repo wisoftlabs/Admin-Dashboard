@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import { CalendarIcon, ChevronDown, SortAsc } from "lucide-react";
+import { CalendarIcon, ChevronDown, SortAsc, Trash2 } from "lucide-react";
 
+import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,6 +11,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { useDeleteGalleryImageMutation } from "@/hooks/gallery/mutations";
 import { cn } from "@/lib/utils";
 
 type GalleryImage = {
@@ -36,6 +38,7 @@ export function GalleryYearSection({
 }: GalleryYearSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [sortType, setSortType] = useState<SortType>("date");
+  const deleteImageMutation = useDeleteGalleryImageMutation();
 
   const sortedImages = [...images].sort((a, b) => {
     if (sortType === "date") {
@@ -45,7 +48,7 @@ export function GalleryYearSection({
   });
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden py-0">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger className="w-full">
           <div
@@ -104,7 +107,7 @@ export function GalleryYearSection({
                   <div
                     key={image.id}
                     className={cn(
-                      "relative aspect-square rounded-md overflow-hidden border-2 cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-md",
+                      "group relative aspect-square rounded-md overflow-hidden border-2 cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-md",
                       isSelected
                         ? "border-primary shadow-md shadow-primary/20"
                         : "border-transparent bg-muted",
@@ -131,6 +134,19 @@ export function GalleryYearSection({
                     >
                       {image.title}
                     </div>
+                    <ConfirmDialog
+                      title="정말로 이 이미지를 삭제하시겠습니까?"
+                      onConfirm={() => deleteImageMutation.mutate(image.id)}
+                    >
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-1.5 left-1.5 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg bg-white/90 hover:bg-white"
+                        onClick={e => e.stopPropagation()}
+                      >
+                        <Trash2 className="w-3 h-3 text-red-600" />
+                      </Button>
+                    </ConfirmDialog>
                     <div
                       className={cn(
                         "absolute top-1.5 right-1.5 w-5 h-5 rounded border-2 flex items-center justify-center transition-all",

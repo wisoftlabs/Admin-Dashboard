@@ -158,7 +158,7 @@ export function SlideListSection({ slides, onRemove }: SlideListSectionProps) {
   };
 
   return (
-    <Card className="mb-3 overflow-hidden">
+    <Card className="mb-3 overflow-hidden py-0">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger className="w-full">
           <div className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors">

@@ -24,11 +24,11 @@ export function uploadGalleryImages(
 }
 
 export function getGalleryImages(): Promise<GalleryImage[]> {
-  return apiClient<GalleryImage[]>("gallery_images");
+  return apiClient<GalleryImage[]>("gallery/images");
 }
 
 export function deleteGalleryImage(imageId: string): Promise<void> {
-  return apiClient<void>(`gallery_images/${imageId}`, {
+  return apiClient<void>(`gallery/images/${imageId}`, {
     method: "DELETE",
   });
 }
@@ -44,14 +44,14 @@ export function updateGalleryImage(
   imageId: string,
   title: string,
 ): Promise<GalleryImage> {
-  return apiClient<GalleryImage>(`gallery_images/${imageId}`, {
+  return apiClient<GalleryImage>(`gallery/images/${imageId}`, {
     method: "PATCH",
     body: { title },
   });
 }
 
 export async function getGallerySlides(): Promise<GallerySlide[]> {
-  const slides = await apiClient<GallerySlide[]>("gallery_slides");
+  const slides = await apiClient<GallerySlide[]>("gallery/slides");
   return slides.sort((a, b) => a.order - b.order);
 }
 
@@ -77,7 +77,7 @@ export async function addImagesToSlides(
         created_at: new Date().toISOString(),
       };
 
-      return apiClient<GallerySlide>("gallery_slides", {
+      return apiClient<GallerySlide>("gallery/slides", {
         method: "POST",
         body: newSlide,
       });
@@ -92,7 +92,7 @@ export function reorderSlides(
 ): Promise<GallerySlide[]> {
   const updatedSlides = Promise.all(
     slides.map(slide =>
-      apiClient<GallerySlide>(`gallery_slides/${slide.id}`, {
+      apiClient<GallerySlide>(`gallery/slides/${slide.id}`, {
         method: "PATCH",
         body: { order: slide.order },
       }),
@@ -103,7 +103,7 @@ export function reorderSlides(
 }
 
 export function deleteSlide(slideId: string): Promise<void> {
-  return apiClient<void>(`gallery_slides/${slideId}`, {
+  return apiClient<void>(`gallery/slides/${slideId}`, {
     method: "DELETE",
   });
 }
