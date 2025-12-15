@@ -8,6 +8,10 @@ export function useNews() {
   return useQuery(newsQueryOptions.list());
 }
 
+export function usePinnedNews() {
+  return useQuery(newsQueryOptions.pinned());
+}
+
 export function useNewsById(id: News["id"]) {
   return useQuery(newsQueryOptions.detail(id));
 }
