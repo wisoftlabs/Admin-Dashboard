@@ -63,25 +63,25 @@ export function HomePage() {
         <StatsCard
           icon={FolderKanban}
           value={stats?.project_count || 0}
-          label="Project"
+          label="Projects"
           variant="project"
         />
         <StatsCard
           icon={FileText}
           value={stats?.paper_count || 0}
-          label="Paper"
+          label="Papers"
           variant="paper"
         />
         <StatsCard
           icon={Award}
           value={stats?.award_count || 0}
-          label="Award"
+          label="Awards"
           variant="award"
         />
         <StatsCard
           icon={Scale}
           value={stats?.patent_count || 0}
-          label="Patent"
+          label="Patents"
           variant="patent"
         />
       </div>
