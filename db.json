@@ -239,13 +239,6 @@
   ],
   "news": [
     {
-      "id": "281ce799-b9db-409d-a6c0-318ba855d3b8",
-      "title": "공지사항 제목 1",
-      "content": "이건 첫번째 공지사항임 ",
-      "created_at": "2025-11-27T15:00:00.000Z",
-      "is_pin": true
-    },
-    {
       "id": "1933c06d-ad17-4203-b9f4-e57e4111cdb1",
       "title": "공지사항 제목 3",
       "content": "이것은 3번째 공지사항의 내용입니다. 중요한 정보들을 담고 있습니다.",
@@ -537,6 +530,92 @@
       "invention_date": "2025-02-01T00:00:00.000Z",
       "pdf_url": "https://www.orimi.com/pdf-test.pdf",
       "link": "https://www.google.com"
+    }
+  ],
+  "gallery_images": [
+    {
+      "id": "f_001",
+      "title": "연구실 단체 사진",
+      "file_url": "https://picsum.photos/seed/lab1/800/600",
+      "type": "img",
+      "created_at": "2024-03-15T10:30:00Z"
+    },
+    {
+      "id": "f_002",
+      "title": "AI 학회 발표",
+      "file_url": "https://picsum.photos/seed/conf1/800/600",
+      "type": "img",
+      "created_at": "2024-05-20T14:20:00Z"
+    },
+    {
+      "id": "f_003",
+      "title": "프로젝트 시연",
+      "file_url": "https://picsum.photos/seed/demo1/800/600",
+      "type": "img",
+      "created_at": "2024-06-10T09:15:00Z"
+    },
+    {
+      "id": "f_004",
+      "title": "워크샵",
+      "file_url": "https://picsum.photos/seed/workshop1/800/600",
+      "type": "img",
+      "created_at": "2024-07-05T16:45:00Z"
+    },
+    {
+      "id": "f_005",
+      "title": "여름 MT",
+      "file_url": "https://picsum.photos/seed/summer1/800/600",
+      "type": "img",
+      "created_at": "2024-08-12T11:00:00Z"
+    },
+    {
+      "id": "f_006",
+      "title": "논문 게재 축하",
+      "file_url": "https://picsum.photos/seed/paper1/800/600",
+      "type": "img",
+      "created_at": "2024-09-22T15:30:00Z"
+    },
+    {
+      "id": "f_007",
+      "file_url": "https://picsum.photos/seed/lab2/800/600",
+      "type": "img",
+      "created_at": "2023-11-10T10:00:00Z"
+    },
+    {
+      "id": "f_008",
+      "title": "신입생 환영회",
+      "file_url": "https://picsum.photos/seed/welcome1/800/600",
+      "type": "img",
+      "created_at": "2023-03-05T14:00:00Z"
+    }
+  ],
+  "gallery_slides": [
+    {
+      "id": "s_001",
+      "image_id": "f_001",
+      "title": "연구실 단체 사진",
+      "file_url": "https://picsum.photos/seed/lab1/800/600",
+      "type": "img",
+      "order": 1,
+      "created_at": "2024-03-15T10:30:00Z"
+    },
+    {
+      "id": "s_002",
+      "image_id": "f_003",
+      "title": "프로젝트 시연",
+      "file_url": "https://picsum.photos/seed/demo1/800/600",
+      "type": "img",
+      "order": 2,
+      "created_at": "2024-06-10T09:15:00Z"
+    },
+    {
+      "id": "s_003",
+      "image_id": "f_005",
+      "title": "여름 MT",
+      "file_url": "https://picsum.photos/seed/summer1/800/600",
+      "type": "img",
+      "order": 3,
+      "created_at": "2024-08-12T11:00:00Z"
     }
   ]
 }
