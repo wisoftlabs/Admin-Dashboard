@@ -9,9 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import type { NewsPreview } from "@/lib/schemas/news/news-preview";
 
 type NewsEditDialogProps = {
-  newsId: string;
+  news: NewsPreview;
   onEdited: () => void;
 } & ComponentProps<typeof Dialog>;
 
@@ -20,7 +21,7 @@ export function NewsUpdateDialog({
   onOpenChange,
   onEdited,
   children,
-  newsId,
+  news,
 }: NewsEditDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -32,7 +33,7 @@ export function NewsUpdateDialog({
             공지사항을 수정합니다.
           </DialogDescription>
         </DialogHeader>
-        <NewsUpdateDialogContent newsId={newsId} onSuccess={onEdited} />
+        <NewsUpdateDialogContent news={news} onSuccess={onEdited} />
       </DialogContent>
     </Dialog>
   );

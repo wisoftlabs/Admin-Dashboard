@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,16 +12,22 @@ import {
 } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useLogin } from "@/hooks/auth/mutations";
+import { type LoginFormValues, loginSchema } from "@/lib/schemas/login";
 
 export function LoginPage() {
-  const navigate = useNavigate();
-  const login = useAuthStore(state => state.login);
-  const form = useForm();
+  const { mutate: login, isPending } = useLogin();
 
-  const handleLogin = () => {
-    login();
-    navigate("/home");
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      user_name: "",
+      password: "",
+    },
+  });
+
+  const handleLogin = (values: LoginFormValues) => {
+    login(values);
   };
 
   return (
@@ -35,7 +42,7 @@ export function LoginPage() {
             <form onSubmit={form.handleSubmit(handleLogin)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="username"
+                name="user_name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>아이디</FormLabel>
@@ -59,8 +66,8 @@ export function LoginPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                로그인
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {isPending ? "로그인 중..." : "로그인"}
               </Button>
             </form>
           </Form>

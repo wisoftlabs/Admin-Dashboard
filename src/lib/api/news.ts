@@ -5,28 +5,28 @@ import type { NewsPreview } from "@/lib/schemas/news/news-preview";
 import { type NewsUpdateFormData } from "@/lib/schemas/news/news-update-form-data";
 
 export async function getNews(): Promise<NewsPreview[]> {
-  return apiClient<NewsPreview[]>("news");
+  return apiClient<NewsPreview[]>("admin/home/news");
 }
 
 export async function createNews(data: NewsCreateFormData): Promise<News> {
-  return apiClient<News>("news", { method: "POST", body: data });
+  return apiClient<News>("admin/home/news", { method: "POST", data });
 }
 
 export async function updateNews(id: string, data: NewsUpdateFormData) {
-  return apiClient<News>(`news/${id}`, { method: "PATCH", body: data });
+  return apiClient<News>(`admin/home/news/${id}`, { method: "PATCH", data });
 }
 
-export async function toggleNewsPin(id: string, is_pin: boolean) {
-  return apiClient<void>(`news/${id}`, {
+export async function toggleNewsActive(id: string, is_active: boolean) {
+  return apiClient<void>(`admin/home/news/${id}`, {
     method: "PATCH",
-    body: { is_pin: !is_pin },
+    data: { is_active: !is_active },
   });
 }
 
 export async function getNewsById(id: string): Promise<News> {
-  return apiClient<News>(`news/${id}`);
+  return apiClient<News>(`admin/home/news/${id}`);
 }
 
 export async function deleteNews(id: string): Promise<void> {
-  return apiClient<void>(`news/${id}`, { method: "DELETE" });
+  return apiClient<void>(`admin/home/news/${id}`, { method: "DELETE" });
 }

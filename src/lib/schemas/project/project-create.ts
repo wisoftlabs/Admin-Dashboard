@@ -6,6 +6,7 @@ import { ThumbnailFileSchema } from "@/lib/schemas/shared/thumbnail";
 export const ProjectCreateFormDataSchema = ProjectSchema
   .omit({
     id: true,
+    thumbnail_url: true,
   })
   .extend({
     thumbnail: ThumbnailFileSchema,

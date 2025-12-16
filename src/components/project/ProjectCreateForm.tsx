@@ -32,7 +32,7 @@ export function ProjectCreateForm({ onSuccess }: ProjectCreateFormProps) {
     },
   });
 
-  const { isDirty, isValid } = form.formState;
+  const { isValid } = form.formState;
   const { mutate: createProject, isPending } = useCreateProjectMutation();
 
   function onSubmit(data: ProjectCreateFormData) {
@@ -44,6 +44,8 @@ export function ProjectCreateForm({ onSuccess }: ProjectCreateFormProps) {
     });
   }
 
+  const sendable = !isValid || isPending;
+
   return (
     <Form {...form}>
       <form
@@ -53,7 +55,7 @@ export function ProjectCreateForm({ onSuccess }: ProjectCreateFormProps) {
         <div className="flex justify-end mb-4">
           <Button
             type="submit"
-            disabled={!isDirty || !isValid || isPending}
+            disabled={sendable}
             size="sm"
           >
             {isPending ? <Spinner /> : "생성"}

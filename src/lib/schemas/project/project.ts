@@ -10,7 +10,7 @@ export const ProjectSchema = z.object({
   name: z.string().min(1, "프로젝트 이름을 입력해주세요."),
   description: z.string(),
   members: z.array(MemberSchema),
-  thumbnail: z.string(),
+  thumbnail_url: z.string(),
   link: z.string(),
 });
 
