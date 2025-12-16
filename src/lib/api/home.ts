@@ -11,7 +11,7 @@ type CalendarEvent = {
 };
 
 export function getHomeStats(): Promise<HomeStats> {
-  return apiClient<HomeStats>("home/stats");
+  return apiClient<HomeStats>("admin/home/stats");
 }
 
 function formatTimeRange(start: string, end: string): string {
@@ -43,7 +43,7 @@ function calculateDayDifference(start: string, end: string): number {
 }
 
 export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
-  const events = await apiClient<CalendarEvent[]>("home/calendar");
+  const events = await apiClient<CalendarEvent[]>("admin/home/calendar");
 
   return events.map((event) => {
     const startDate = new Date(event.start);
