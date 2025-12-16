@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, ImagesIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { FILE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type PhotoSlideItem = {
@@ -103,7 +104,7 @@ export function PhotoSlides({ slides }: PhotoSlidesProps) {
             >
               {slide.imageUrl
                 ? (
-                    <img src={slide.imageUrl} alt={slide.title} className="w-full h-full object-cover" />
+                    <img src={FILE_URL + slide.imageUrl} alt={slide.title} className="w-full h-full object-cover" />
                   )
                 : (
                     "IMG"
