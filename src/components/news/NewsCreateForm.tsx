@@ -26,7 +26,7 @@ export function NewsCreateForm({ onSuccess }: NewsCreateFormProps) {
     defaultValues: {
       title: "",
       content: "",
-      is_pin: false,
+      is_active: false,
     },
   });
   const { isValid } = form.formState;
@@ -56,7 +56,7 @@ export function NewsCreateForm({ onSuccess }: NewsCreateFormProps) {
         />
         <CheckboxFormField
           control={form.control}
-          name="is_pin"
+          name="is_active"
           label="상단 고정"
           description="체크 시 공지사항 목록 상단에 고정됩니다."
         />

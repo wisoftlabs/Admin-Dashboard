@@ -27,6 +27,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useReorderSlidesMutation } from "@/hooks/gallery/mutations";
+import { FILE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type SlideItem = {
@@ -73,7 +74,7 @@ function SortableSlideItem({ slide, onRemove }: SortableSlideItemProps) {
         {slide.imageUrl
           ? (
               <img
-                src={slide.imageUrl}
+                src={FILE_URL + slide.imageUrl}
                 alt={slide.title}
                 className="w-full h-full object-cover"
               />

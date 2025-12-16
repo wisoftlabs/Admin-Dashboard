@@ -10,11 +10,11 @@ import { type Orientation } from "@/lib/schemas/shared/orientation";
 import { getImageOrientation, getImageResolutions } from "@/lib/utils/image";
 
 export async function getAwards(): Promise<AwardPreview[]> {
-  return await apiClient<AwardPreview[]>("awards");
+  return await apiClient<AwardPreview[]>("admin/awards");
 }
 
 export async function getAward(id: string): Promise<Award> {
-  return apiClient<Award>(`awards/${id}`);
+  return apiClient<Award>(`admin/awards/${id}`);
 }
 
 export async function createAward(data: AwardCreateFormData): Promise<Award> {
@@ -39,7 +39,7 @@ export async function createAward(data: AwardCreateFormData): Promise<Award> {
   formData.append("orientation", orientation);
   formData.append("image_type", image_type);
 
-  return apiClient<Award>("awards", { method: "POST", body: formData });
+  return apiClient<Award>("admin/awards", { method: "POST", data: formData });
 }
 
 export async function updateAward(id: string, data: AwardUpdateFormData): Promise<Award> {
@@ -68,9 +68,9 @@ export async function updateAward(id: string, data: AwardUpdateFormData): Promis
     }
   }
 
-  return apiClient<Award>(`awards/${id}`, { method: "PATCH", body: formData });
+  return apiClient<Award>(`admin/awards/${id}`, { method: "PATCH", data: formData });
 }
 
 export function deleteAward(id: string): Promise<void> {
-  return apiClient<void>(`awards/${id}`, { method: "DELETE" });
+  return apiClient<void>(`admin/awards/${id}`, { method: "DELETE" });
 }

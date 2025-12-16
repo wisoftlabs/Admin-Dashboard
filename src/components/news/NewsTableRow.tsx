@@ -26,16 +26,16 @@ export function NewsTableRow({ news }: NewsTableRowProps) {
     <TableRow>
       <TableCell className="w-24 text-center">
         <Badge
-          variant={news.is_pin ? "default" : "secondary"}
-          onClick={() => togglePin(news.is_pin)}
+          variant={news.is_active ? "default" : "secondary"}
+          onClick={() => togglePin(news.is_active)}
           className="cursor-pointer"
         >
-          {news.is_pin ? "고정" : "일반"}
+          {news.is_active ? "고정" : "일반"}
         </Badge>
       </TableCell>
       <TableCell className="font-medium">
         <NewsUpdateDialog
-          newsId={news.id}
+          news={news}
           open={open}
           onOpenChange={onOpenChange}
           onEdited={closeDialog}

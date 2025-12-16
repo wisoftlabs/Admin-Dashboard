@@ -8,6 +8,7 @@ import {
 import { PdfFileFormField } from "@/components/shared/form-fields/PdfFileFormField";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { FILE_URL } from "@/lib/constants";
 import { type Patent } from "@/lib/schemas/patent/patent";
 import { type PatentCreateFormData } from "@/lib/schemas/patent/patent-create-form-data";
 import { type PatentUpdateFormData } from "@/lib/schemas/patent/patent-update-form-data";
@@ -29,7 +30,7 @@ export function PatentUpdateFormFields<T extends PatentCreateFormData | PatentUp
             <div className="space-y-2 flex flex-col">
               <Label>PDF</Label>
               <div className="aspect-[3/4] w-2/3 self-center rounded-md overflow-hidden border flex items-center justify-center">
-                <iframe src={patent.pdf_url} className="w-full h-full" title={patent.name} />
+                <iframe src={FILE_URL + patent.pdf_url} className="w-full h-full" title={patent.name} />
               </div>
               <Button variant="outline" className="self-center" size="sm" asChild>
                 <a href={patent.pdf_url} target="_blank" rel="noopener noreferrer">새 탭으로 보기</a>

@@ -13,6 +13,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useDeleteGalleryImageMutation } from "@/hooks/gallery/mutations";
+import { FILE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type GalleryImage = {
@@ -122,7 +123,7 @@ export function GalleryYearSection({
                       {image.imageUrl
                         ? (
                             <img
-                              src={image.imageUrl}
+                              src={FILE_URL + image.imageUrl}
                               alt={image.title}
                               className="w-full h-full object-cover"
                             />
