@@ -89,10 +89,10 @@ export function HomePage() {
       <PhotoSlides slides={photoSlides} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="h-[39vh]">
+        <div className="h-[50vh]">
           <RecentNews news={recentNews} />
         </div>
-        <div className="h-[39vh]">
+        <div className="h-[50vh]">
           <UpcomingEvents events={upcomingEvents} />
         </div>
       </div>

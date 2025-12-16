@@ -36,7 +36,7 @@ export function PhotoSlides({ slides }: PhotoSlidesProps) {
       <Card className="p-5">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-base font-bold flex items-center gap-2">
-            <ImagesIcon className="w-4 h-4 text-[#43e97b]" />
+            <ImagesIcon className="w-4 h-4" />
             Photo Slides
           </h3>
           <Link to="/gallery" className="text-xs font-semibold text-primary hover:text-primary/80 flex items-center gap-1">
@@ -54,16 +54,16 @@ export function PhotoSlides({ slides }: PhotoSlidesProps) {
   }
 
   return (
-    <Card>
-      <div className="px-5 pt-5 pb-3 flex items-center justify-between">
+    <Card className="overflow-hidden py-0">
+      <div className="px-4 py-4 flex items-center justify-between">
         <h3 className="text-base font-bold flex items-center gap-2">
-          <ImagesIcon className="w-4 h-4 text-[#43e97b]" />
+          <ImagesIcon className="w-4 h-4" />
           Photo Slides
         </h3>
         <div className="flex items-center gap-2">
           <Link to="/gallery" className="text-xs font-semibold text-primary hover:text-primary/80 flex items-center gap-1">
             Gallery 관리
-            <ChevronRight className="w-3 h-3" />
+            <ChevronRight className="w-3" />
           </Link>
           <div className="flex gap-1.5">
             <Button
@@ -88,17 +88,17 @@ export function PhotoSlides({ slides }: PhotoSlidesProps) {
 
       <div
         ref={carouselRef}
-        className="px-5 pb-5 flex gap-3 overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
+        className="px-4 pb-2 pt-1 flex gap-3 overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted"
         style={{ scrollbarWidth: "thin" }}
       >
         {slides.map(slide => (
           <div
             key={slide.id}
-            className="relative w-[200px] h-[200px] rounded-lg overflow-hidden shadow-md hover:-translate-y-1 hover:shadow-lg transition-all flex-shrink-0"
+            className="relative w-[200px] h-[200px] rounded-lg overflow-hidden shadow-md flex-shrink-0"
           >
             <div className={cn(
-              "w-full h-full flex items-center justify-center text-white font-semibold",
-              slide.imageUrl ? "" : "bg-gradient-to-br from-[#667eea] to-[#764ba2]",
+              "w-full h-full flex items-center justify-center font-semibold text-xs",
+              slide.imageUrl ? "" : "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400",
             )}
             >
               {slide.imageUrl
@@ -109,7 +109,7 @@ export function PhotoSlides({ slides }: PhotoSlidesProps) {
                     "IMG"
                   )}
             </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-2 text-xs font-medium">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-1.5 text-xs truncate">
               {slide.title}
             </div>
           </div>

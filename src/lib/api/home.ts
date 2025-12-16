@@ -52,7 +52,6 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
     let timeText: string;
 
     if (event.allDay) {
-      // allDay=true: 종일 또는 N일
       if (dayDiff === 0) {
         timeText = "종일";
       }
@@ -61,13 +60,10 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
       }
     }
     else {
-      // allDay=false: 시간 표시 또는 날짜 넘는 경우
       if (dayDiff === 0) {
-        // 같은 날: 시간 범위 표시
         timeText = formatTimeRange(event.start, event.end);
       }
       else {
-        // 날짜 넘는 경우: N일로 표시
         timeText = `${dayDiff + 1}일`;
       }
     }

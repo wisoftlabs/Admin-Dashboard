@@ -19,7 +19,7 @@ const variantStyles = {
 
 export function StatsCard({ icon: Icon, value, label, variant }: StatsCardProps) {
   return (
-    <Card className="p-4 transition-all hover:-translate-y-1 hover:shadow-lg cursor-pointer">
+    <Card className="p-4">
       <div className="flex justify-between items-start">
         <div>
           <div className="text-2xl font-bold text-foreground mb-0.5">{value}</div>
