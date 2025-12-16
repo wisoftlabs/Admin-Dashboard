@@ -33,7 +33,7 @@ export function PatentUpdateFormFields<T extends PatentCreateFormData | PatentUp
                 <iframe src={FILE_URL + patent.pdf_url} className="w-full h-full" title={patent.name} />
               </div>
               <Button variant="outline" className="self-center" size="sm" asChild>
-                <a href={patent.pdf_url} target="_blank" rel="noopener noreferrer">새 탭으로 보기</a>
+                <a href={FILE_URL + patent.pdf_url} target="_blank" rel="noopener noreferrer">새 탭으로 보기</a>
               </Button>
             </div>
           )}
