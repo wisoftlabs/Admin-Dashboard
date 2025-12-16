@@ -67,16 +67,10 @@ export async function addImagesToSlides(
 export function reorderSlides(
   slides: Array<{ id: string; order: number }>,
 ): Promise<GallerySlide[]> {
-  const updatedSlides = Promise.all(
-    slides.map(slide =>
-      apiClient<GallerySlide>(`admin/gallery/slides/${slide.id}`, {
-        method: "PATCH",
-        data: { order: slide.order },
-      }),
-    ),
-  );
-
-  return updatedSlides;
+  return apiClient<GallerySlide[]>("admin/gallery/slides", {
+    method: "PATCH",
+    data: { slides },
+  });
 }
 
 export function deleteSlide(slideId: string): Promise<void> {
