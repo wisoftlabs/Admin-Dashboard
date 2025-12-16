@@ -8,11 +8,6 @@ export async function getNews(): Promise<NewsPreview[]> {
   return apiClient<NewsPreview[]>("admin/home/news");
 }
 
-export async function getPinnedNews(): Promise<NewsPreview[]> {
-  const allNews = await apiClient<NewsPreview[]>("news");
-  return allNews.filter(news => news.is_pin);
-}
-
 export async function createNews(data: NewsCreateFormData): Promise<News> {
   return apiClient<News>("admin/home/news", { method: "POST", data });
 }
