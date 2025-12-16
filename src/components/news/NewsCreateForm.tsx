@@ -25,7 +25,7 @@ export function NewsCreateForm({ onSuccess }: NewsCreateFormProps) {
     resolver: zodResolver(NewsCreateFormDataSchema),
     defaultValues: {
       title: "",
-      content: "",
+      detail: "",
       is_active: false,
     },
   });
@@ -50,7 +50,7 @@ export function NewsCreateForm({ onSuccess }: NewsCreateFormProps) {
         />
         <TextAreaFormField
           control={form.control}
-          name="content"
+          name="detail"
           label="내용"
           placeholder="공지사항 내용을 입력하세요"
         />
