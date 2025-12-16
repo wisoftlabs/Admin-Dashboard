@@ -7,13 +7,12 @@ import { UpcomingEvents } from "@/components/home/UpcomingEvents";
 import { ErrorView } from "@/components/shared/error-view";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGallerySlides } from "@/hooks/gallery/queries";
-import { useHomeStats, useUpcomingEvents } from "@/hooks/home/queries";
-import { usePinnedNews } from "@/hooks/news/queries";
+import { useActiveNews, useHomeStats, useUpcomingEvents } from "@/hooks/home/queries";
 
 export function HomePage() {
   const { data: stats, isLoading: statsLoading, isError: statsError } = useHomeStats();
   const { data: slides = [], isLoading: slidesLoading } = useGallerySlides();
-  const { data: pinnedNews = [], isLoading: newsLoading } = usePinnedNews();
+  const { data: activeNews = [], isLoading: newsLoading } = useActiveNews();
   const { data: upcomingEvents = [], isLoading: eventsLoading } = useUpcomingEvents();
 
   const photoSlides = slides.map(slide => ({
@@ -22,7 +21,7 @@ export function HomePage() {
     imageUrl: slide.file_url,
   }));
 
-  const recentNews = pinnedNews.map(item => ({
+  const recentNews = activeNews.map(item => ({
     id: item.id,
     title: item.title,
     date: new Date(item.created_at).toLocaleDateString("ko-KR", {

@@ -9,3 +9,7 @@ export function useHomeStats() {
 export function useUpcomingEvents() {
   return useQuery(homeQueryOptions.events());
 }
+
+export function useActiveNews() {
+  return useQuery(homeQueryOptions.activeNews());
+}

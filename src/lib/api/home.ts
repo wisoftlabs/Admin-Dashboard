@@ -1,6 +1,7 @@
 import { apiClient } from "@/lib/api-client";
 import type { HomeStats } from "@/lib/schemas/home/home-stats";
 import type { UpcomingEvent } from "@/lib/schemas/home/upcoming-event";
+import type { NewsPreview } from "@/lib/schemas/news/news-preview";
 
 type CalendarEvent = {
   id: string;
@@ -12,6 +13,11 @@ type CalendarEvent = {
 
 export function getHomeStats(): Promise<HomeStats> {
   return apiClient<HomeStats>("admin/home/stats");
+}
+
+export async function getActiveNews(): Promise<NewsPreview[]> {
+  const allNews = await apiClient<NewsPreview[]>("admin/home/news");
+  return allNews.filter(news => news.is_active);
 }
 
 function formatTimeRange(start: string, end: string): string {
