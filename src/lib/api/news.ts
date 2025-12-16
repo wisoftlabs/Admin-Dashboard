@@ -28,5 +28,5 @@ export async function getNewsById(id: string): Promise<News> {
 }
 
 export async function deleteNews(id: string): Promise<void> {
-  return apiClient<void>(`admin/news/${id}`, { method: "DELETE" });
+  return apiClient<void>(`admin/home/news/${id}`, { method: "DELETE" });
 }
