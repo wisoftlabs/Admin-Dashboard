@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router";
-
 import { Clock, LogOut } from "lucide-react";
 
 import WisoftLogo from "@/assets/wisoft-fav.webp";
@@ -11,16 +9,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useLoginExtends, useLogout } from "@/hooks/auth/mutations";
 
 export function SidebarUser() {
-  const navigate = useNavigate();
-  const logout = useAuthStore(state => state.logout);
+  const { mutate: logout } = useLogout();
+  const { mutate: loginExtends } = useLoginExtends();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
+  const handleLogout = async () => logout();
+  const handleLoginExtends = async () => loginExtends();
 
   return (
     <div className="flex items-center p-2 border-t">
@@ -41,7 +37,7 @@ export function SidebarUser() {
               variant="ghost"
               size="icon"
               className="h-8 w-8"
-              onClick={() => alert("연장 버튼 클릭!")}
+              onClick={handleLoginExtends}
             >
               <Clock className="h-4 w-4" />
             </Button>

@@ -6,13 +6,16 @@ import type { PaperCreateFormData } from "@/lib/schemas/paper/paper-create-form-
 import type { PaperPreview } from "@/lib/schemas/paper/paper-preview";
 import { type PaperUpdateFormData } from "@/lib/schemas/paper/paper-update-form-data";
 import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
+import type { PaperGetAllResponse } from "@/types/responses/papers";
 
 export async function getPapers(): Promise<PaperPreview[]> {
-  return await apiClient<PaperPreview[]>("papers");
+  const response = await apiClient<PaperGetAllResponse>("admin/papers");
+
+  return response.papers;
 }
 
 export async function getPaper(id: string): Promise<Paper> {
-  return apiClient<Paper>(`papers/${id}`);
+  return apiClient<Paper>(`admin/papers/${id}`);
 }
 
 export async function createPaper(data: PaperCreateFormData): Promise<Paper> {
@@ -34,7 +37,7 @@ export async function createPaper(data: PaperCreateFormData): Promise<Paper> {
   });
   formData.append("image_type", image_type);
 
-  return apiClient<Paper>("papers", { method: "POST", body: formData });
+  return apiClient<Paper>("admin/papers", { method: "POST", data: formData });
 }
 
 export async function updatePaper(id: string, data: PaperUpdateFormData): Promise<Paper> {
@@ -63,9 +66,9 @@ export async function updatePaper(id: string, data: PaperUpdateFormData): Promis
     }
   }
 
-  return apiClient<Paper>(`papers/${id}`, { method: "PATCH", body: formData });
+  return apiClient<Paper>(`admin/papers/${id}`, { method: "PATCH", data: formData });
 }
 
 export function deletePaper(id: string): Promise<void> {
-  return apiClient<void>(`papers/${id}`, { method: "DELETE" });
+  return apiClient<void>(`admin/papers/${id}`, { method: "DELETE" });
 }

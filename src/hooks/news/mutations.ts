@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import {
   createNews,
   deleteNews,
-  toggleNewsPin,
+  toggleNewsActive,
   updateNews,
 } from "@/lib/api/news";
 import type { NewsCreateFormData } from "@/lib/schemas/news/news-create-form-data";
@@ -47,8 +47,8 @@ export function useUpdateNewsMutation(id: string) {
 export function useToggleNewsPinMutation(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (is_pin: boolean) => {
-      await toggleNewsPin(id, is_pin);
+    mutationFn: async (is_active: boolean) => {
+      await toggleNewsActive(id, is_active);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({

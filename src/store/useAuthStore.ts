@@ -13,12 +13,18 @@ export const useAuthStore = create(
     set => ({
       isAuthenticated: false,
       expiresAt: null,
-      login: () =>
+      login: () => {
         set({
           isAuthenticated: true,
           expiresAt: Date.now() + 30 * 60 * 1000,
-        }),
-      logout: () => set({ isAuthenticated: false, expiresAt: null }),
+        });
+      },
+      logout: async () => {
+        set({
+          isAuthenticated: false,
+          expiresAt: null,
+        });
+      },
     }),
     {
       name: "auth-store",

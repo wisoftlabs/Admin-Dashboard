@@ -3,6 +3,7 @@ import { useState } from "react";
 import { PaperUpdateDialog } from "@/components/paper/UpdateDialog/PaperUpdateDialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDialog } from "@/hooks/shared/use-dialog";
+import { FILE_URL } from "@/lib/constants";
 import { type PaperPreview } from "@/lib/schemas/paper/paper-preview";
 import { cn } from "@/lib/utils";
 
@@ -31,7 +32,7 @@ export function PaperCard({ paper }: PaperCardProps) {
       >
         {isLoading && <Skeleton className="absolute inset-0 h-full w-full animate-pulse" />}
         <img
-          src={paper.image_url}
+          src={FILE_URL + paper.image_url}
           alt={`Paper ${paper.year}`}
           onLoad={() => setIsLoading(false)}
           className={cn(

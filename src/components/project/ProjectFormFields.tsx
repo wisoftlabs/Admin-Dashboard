@@ -4,6 +4,7 @@ import { ProjectMemberField } from "@/components/project/ProjectMemberField";
 import { ProjectStatusSelectField } from "@/components/project/ProjectStatusSelectField";
 import { ImageLightbox } from "@/components/shared/dialog/ImageLightBox";
 import { ImageFileFormField, InputFormField, TextAreaFormField, YearSelectField } from "@/components/shared/form-fields";
+import { FILE_URL } from "@/lib/constants";
 import type { Project } from "@/lib/schemas/project/project";
 import type { ProjectCreateFormData } from "@/lib/schemas/project/project-create";
 import type { ProjectUpdateFormData } from "@/lib/schemas/project/project-update";
@@ -61,10 +62,10 @@ export function ProjectFormFields<T extends ProjectCreateFormData | ProjectUpdat
         onError={message => form.setError("thumbnail" as Path<T>, { message })}
       />
 
-      {selectedProject?.thumbnail && (
-        <ImageLightbox imageSrc={selectedProject.thumbnail}>
+      {selectedProject?.thumbnail_url && (
+        <ImageLightbox imageSrc={selectedProject.thumbnail_url}>
           <img
-            src={selectedProject.thumbnail}
+            src={FILE_URL + selectedProject.thumbnail_url}
             alt="Project Thumbnail"
             className="rounded-md border w-full max-w-xs"
           />

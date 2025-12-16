@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProjects } from "@/hooks/projects/queries";
+import { FILE_URL } from "@/lib/constants";
 import type { Project } from "@/lib/schemas/project/project";
 import { cn } from "@/lib/utils";
 
@@ -146,7 +147,7 @@ function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps)
       <ItemMedia className="h-full w-auto aspect-square shrink-0 overflow-hidden rounded-md">
         <img
           className="h-full w-full object-cover"
-          src={project.thumbnail}
+          src={FILE_URL + project.thumbnail_url}
           alt={`${project.name} Thumbnail`}
         />
       </ItemMedia>

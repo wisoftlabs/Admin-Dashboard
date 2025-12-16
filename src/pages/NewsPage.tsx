@@ -14,13 +14,15 @@ export function NewsPage() {
   const { data: news = [], isError, isLoading } = useNews();
   const { open, onOpenChange, closeDialog } = useDialog();
 
+  console.log(news);
+
   const { pinnedNews, otherNews } = useMemo(() => {
     const sorted = [...news].sort(
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
     );
-    const pinned = sorted.filter(item => item.is_pin);
-    const other = sorted.filter(item => !item.is_pin);
+    const pinned = sorted.filter(item => item.is_active);
+    const other = sorted.filter(item => !item.is_active);
     return { pinnedNews: pinned, otherNews: other };
   }, [news]);
 
