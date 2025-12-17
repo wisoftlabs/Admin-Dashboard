@@ -14,8 +14,6 @@ export function NewsPage() {
   const { data: news = [], isError, isLoading } = useNews();
   const { open, onOpenChange, closeDialog } = useDialog();
 
-  console.log(news);
-
   const { pinnedNews, otherNews } = useMemo(() => {
     const sorted = [...news].sort(
       (a, b) =>
