@@ -48,9 +48,9 @@ export function ProjectUpdateForm({ selectedProject, onDeleted }: ProjectUpdateF
   const onSubmit = (data: ProjectUpdateFormData) => {
     if (!isDirty) return;
     updateProject(data, {
-      onSuccess: (updatedProject) => {
+      onSuccess: () => {
         form.reset({
-          ...updatedProject,
+          ...data,
           thumbnail: undefined,
         });
       },
