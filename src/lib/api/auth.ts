@@ -9,19 +9,13 @@ export const login = async (data: LoginFormValues) => {
 };
 
 export const logout = async () => {
-  return apiClient("logout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  return apiClient("auth/logout", {
+    method: "DELETE",
   });
 };
 
 export const loginExtends = async () => {
-  return apiClient("extends", {
+  return apiClient("extend", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
 };
