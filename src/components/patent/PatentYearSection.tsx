@@ -32,11 +32,9 @@ export function PatentYearSection({
       </CollapsibleTrigger>
 
       <CollapsibleContent>
-        <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4">
+        <div className="border rounded-lg bg-card overflow-hidden">
           {patents.map(patent => (
-            <div key={patent.id} className="mb-4 break-inside-avoid">
-              <PatentCard patent={patent} />
-            </div>
+            <PatentCard key={patent.id} patent={patent} />
           ))}
         </div>
       </CollapsibleContent>
