@@ -8,9 +8,12 @@ import { type AwardUpdateFormData } from "@/lib/schemas/award/award-update-form-
 import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
 import { type Orientation } from "@/lib/schemas/shared/orientation";
 import { getImageOrientation, getImageResolutions } from "@/lib/utils/image";
+import type { AwardGetAllResponse } from "@/types/responses/awards";
 
 export async function getAwards(): Promise<AwardPreview[]> {
-  return await apiClient<AwardPreview[]>("admin/awards");
+  const response = await apiClient<AwardGetAllResponse>("admin/awards");
+
+  return response.awards;
 }
 
 export async function getAward(id: string): Promise<Award> {
