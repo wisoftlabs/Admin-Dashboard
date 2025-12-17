@@ -8,6 +8,7 @@ import {
 } from "@/components/shared/form-fields";
 import { DatePickerFormField } from "@/components/shared/form-fields/DatePickerFormField";
 import { Label } from "@/components/ui/label";
+import { FILE_URL } from "@/lib/constants";
 import { type Paper } from "@/lib/schemas/paper/paper";
 import { type PaperCreateFormData } from "@/lib/schemas/paper/paper-create-form-data";
 import { type PaperUpdateFormData } from "@/lib/schemas/paper/paper-update-form-data";
@@ -29,7 +30,7 @@ export function PaperUpdateFormFields<T extends PaperCreateFormData | PaperUpdat
             <div className="space-y-2 flex flex-col">
               <Label>이미지</Label>
               <div className="aspect-[3/4] w-2/3 self-center rounded-md overflow-hidden border flex items-center justify-center">
-                <img src={selectedPaper.image_url} alt="Current paper" className="w-full h-full object-contain" />
+                <img src={FILE_URL + selectedPaper.image_url} alt="Current paper" className="w-full h-full object-contain" />
               </div>
             </div>
           )}
