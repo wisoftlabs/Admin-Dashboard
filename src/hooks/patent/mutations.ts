@@ -34,7 +34,7 @@ export const useUpdatePatent = (id: Patent["id"]) => {
       toast.success("특허가 성공적으로 수정되었습니다.");
       return Promise.all([
         queryClient.invalidateQueries({ queryKey: patentQueries.lists() }),
-        queryClient.invalidateQueries({ queryKey: patentQueries.detail(id) }),
+        queryClient.invalidateQueries({ queryKey: [...patentQueries.details(), id] }),
       ]);
     },
     onError: (error) => {

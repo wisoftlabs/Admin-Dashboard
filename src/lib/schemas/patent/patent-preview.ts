@@ -6,6 +6,7 @@ export const PatentPreviewSchema = PatentSchema.pick({
   id: true,
   name: true,
   year: true,
+  invention_date: true,
 });
 
 export type PatentPreview = z.infer<typeof PatentPreviewSchema>;
