@@ -3,17 +3,17 @@ import { Award, FileText, FolderKanban, Scale } from "lucide-react";
 import { PhotoSlides } from "@/components/home/PhotoSlides";
 import { RecentNews } from "@/components/home/RecentNews";
 import { StatsCard } from "@/components/home/StatsCard";
-// import { UpcomingEvents } from "@/components/home/UpcomingEvents";
+import { UpcomingEvents } from "@/components/home/UpcomingEvents";
 import { ErrorView } from "@/components/shared/error-view";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGallerySlides } from "@/hooks/gallery/queries";
-import { useActiveNews, useHomeStats } from "@/hooks/home/queries";
+import { useActiveNews, useHomeStats, useUpcomingEvents } from "@/hooks/home/queries";
 
 export function HomePage() {
   const { data: stats, isLoading: statsLoading, isError: statsError } = useHomeStats();
   const { data: slides = [], isLoading: slidesLoading } = useGallerySlides();
   const { data: activeNews = [], isLoading: newsLoading } = useActiveNews();
-  // const { data: upcomingEvents = [], isLoading: eventsLoading } = useUpcomingEvents();
+  const { data: upcomingEvents = [], isLoading: eventsLoading } = useUpcomingEvents();
 
   const photoSlides = slides.map(slide => ({
     id: slide.id,
@@ -35,7 +35,7 @@ export function HomePage() {
     return <ErrorView message="데이터를 불러오는데 실패했습니다." />;
   }
 
-  const isLoading = statsLoading || slidesLoading || newsLoading;
+  const isLoading = statsLoading || slidesLoading || newsLoading || eventsLoading;
 
   if (isLoading) {
     return (
@@ -91,9 +91,9 @@ export function HomePage() {
         <div className="h-[50vh]">
           <RecentNews news={recentNews} />
         </div>
-        {/* <div className="h-[50vh]">
+        <div className="h-[50vh]">
           <UpcomingEvents events={upcomingEvents} />
-        </div> */}
+        </div>
       </div>
     </div>
   );
