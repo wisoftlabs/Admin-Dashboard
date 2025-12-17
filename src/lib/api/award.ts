@@ -6,8 +6,6 @@ import type { AwardCreateFormData } from "@/lib/schemas/award/award-create-form-
 import type { AwardPreview } from "@/lib/schemas/award/award-preview";
 import { type AwardUpdateFormData } from "@/lib/schemas/award/award-update-form-data";
 import { ImageTypeSchema } from "@/lib/schemas/shared/image-type";
-import { type Orientation } from "@/lib/schemas/shared/orientation";
-import { getImageOrientation, getImageResolutions } from "@/lib/utils/image";
 import type { AwardGetAllResponse } from "@/types/responses/awards";
 
 export async function getAwards(): Promise<AwardPreview[]> {
@@ -21,12 +19,6 @@ export async function getAward(id: string): Promise<Award> {
 }
 
 export async function createAward(data: AwardCreateFormData): Promise<Award> {
-  const size = await getImageResolutions(data.image_file);
-  const orientation: Orientation = getImageOrientation(size);
-  const image_type = ImageTypeSchema.parse(
-    data.image_file.type.split("/")[1],
-  );
-
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => {
     if (value instanceof File) {
@@ -39,8 +31,10 @@ export async function createAward(data: AwardCreateFormData): Promise<Award> {
       formData.append(key, String(value));
     }
   });
-  formData.append("orientation", orientation);
-  formData.append("image_type", image_type);
+
+  for (const [key, value] of formData.entries()) {
+    console.log(key, value);
+  }
 
   return apiClient<Award>("admin/awards", { method: "POST", data: formData });
 }
