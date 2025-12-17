@@ -8,6 +8,7 @@ import {
 } from "@/components/shared/form-fields";
 import { DatePickerFormField } from "@/components/shared/form-fields/DatePickerFormField";
 import { Label } from "@/components/ui/label";
+import { FILE_URL } from "@/lib/constants";
 import { type Award } from "@/lib/schemas/award/award";
 import { type AwardUpdateFormData } from "@/lib/schemas/award/award-update-form-data";
 import { cn } from "@/lib/utils";
@@ -34,7 +35,7 @@ export function AwardUpdateFormFields({
                   award.orientation === "portrait" ? "aspect-[3/4]" : "aspect-auto",
                 )}
               >
-                <img src={award.image_url} alt={award.title} className="w-full h-full object-contain" />
+                <img src={FILE_URL + award.image_url} alt={award.title} className="w-full h-full object-contain" />
               </div>
             </div>
           )}

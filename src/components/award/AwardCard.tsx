@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AwardUpdateDialog } from "@/components/award/UpdateDialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDialog } from "@/hooks/shared/use-dialog";
+import { FILE_URL } from "@/lib/constants";
 import { type AwardPreview } from "@/lib/schemas/award/award-preview";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +36,7 @@ export function AwardCard({ award }: AwardCardProps) {
       >
         {isLoading && <Skeleton className="absolute inset-0 h-full w-full animate-pulse" />}
         <img
-          src={award.image_url}
+          src={FILE_URL + award.image_url}
           alt={`Award ${award.year}`}
           onLoad={() => setIsLoading(false)}
           className={cn(
