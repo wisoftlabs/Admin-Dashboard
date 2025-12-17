@@ -24,7 +24,7 @@ export function PaperCreateForm({ onSuccess }: PaperCreateFormProps) {
       year: getCurrentYear(),
       title: "",
       authors: "",
-      abstract: "",
+      paper_abstract: "",
       conference: "",
       journal: "",
       publication_date: new Date(),
