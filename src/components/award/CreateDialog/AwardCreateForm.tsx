@@ -47,12 +47,14 @@ export function AwardCreateForm({ onSuccess }: AwardCreateFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4"
+        className="h-full flex flex-col"
       >
+        <div className="flex justify-end mb-4">
+          <Button type="submit" disabled={isPending || !isValid} size="sm">
+            {isPending ? <Spinner /> : "생성"}
+          </Button>
+        </div>
         <AwardCreateFormFields form={form} />
-        <Button type="submit" disabled={isPending || !isValid}>
-          {isPending ? <Spinner /> : "생성"}
-        </Button>
       </form>
     </Form>
   );

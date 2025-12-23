@@ -24,7 +24,7 @@ export function YearSelectField<T extends FieldValues>({
           <Select
             disabled={disabled}
             onValueChange={val => field.onChange(Number(val))}
-            value={field.value?.toString()}
+            value={field.value ? String(field.value) : undefined}
           >
             <FormControl>
               <SelectTrigger className="w-full select-none">

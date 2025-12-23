@@ -6,6 +6,7 @@ export const PaperPreviewSchema = PaperSchema.pick({
   id: true,
   year: true,
   title: true,
+  authors: true,
   image_url: true,
 });
 

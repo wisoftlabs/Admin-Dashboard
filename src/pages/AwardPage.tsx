@@ -1,58 +1,44 @@
-import { groupBy } from "es-toolkit";
-import { PlusIcon } from "lucide-react";
+import { useState } from "react";
 
-import { AwardYearSection } from "@/components/award/AwardYearSection";
-import { AwardCreateDialog } from "@/components/award/CreateDialog";
-import { ErrorView } from "@/components/shared/error-view";
-import { Button } from "@/components/ui/button";
-import { useAwards } from "@/hooks/award/queries";
-import { useDialog } from "@/hooks/shared/use-dialog";
+import { AwardList } from "@/components/award/AwardList";
+import { AwardCreateForm } from "@/components/award/CreateDialog/AwardCreateForm";
+import { AwardUpdateForm } from "@/components/award/UpdateDialog/AwardUpdateForm";
+import { Separator } from "@/components/ui/separator";
+import type { Award } from "@/lib/schemas/award/award";
 
 export function AwardPage() {
-  const { data: awards = [], isError } = useAwards();
-  const { open, onOpenChange, closeDialog } = useDialog();
+  const [selectedId, setSelectedId] = useState<Award["id"] | null>(null);
 
-  const groupedAwards = groupBy(awards, award => award.year);
-  const years = Object
-    .keys(groupedAwards)
-    .map(Number)
-    .sort((a, b) => b - a);
+  const handleSelectAward = (awardId: Award["id"]) => {
+    if (awardId === selectedId) return handleDeselect();
 
-  if (isError) {
-    return <ErrorView message="수상 정보를 불러오는데 실패했습니다." />;
-  }
+    setSelectedId(awardId);
+  };
+
+  const handleDeselect = () => {
+    setSelectedId(null);
+  };
 
   return (
-    <div className="space-y-8">
-      <div className="border-b pb-6">
-        <div className="flex justify-between">
-          <p className="text-sm text-muted-foreground">
-            전체
-            {" "}
-            {Object.values(groupedAwards).flat().length}
-            개
-          </p>
-
-          <AwardCreateDialog
-            open={open}
-            onOpenChange={onOpenChange}
-            onCreated={closeDialog}
-          >
-            <Button>
-              <PlusIcon />
-            </Button>
-          </AwardCreateDialog>
-        </div>
+    <div className="flex h-full space-x-2">
+      <div className="w-3/5">
+        <AwardList
+          selectedAwardId={selectedId}
+          onSelectAward={handleSelectAward}
+        />
       </div>
-
-      <div className="space-y-8">
-        {years.map(year => (
-          <AwardYearSection
-            key={year}
-            year={year}
-            awards={groupedAwards[year]}
-          />
-        ))}
+      <Separator orientation="vertical" />
+      <div className="w-2/5">
+        {selectedId
+          ? (
+              <AwardUpdateForm
+                selectedAwardId={selectedId}
+                onDeleted={handleDeselect}
+              />
+            )
+          : (
+              <AwardCreateForm onSuccess={handleDeselect} />
+            )}
       </div>
     </div>
   );

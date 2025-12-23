@@ -1,60 +1,44 @@
-import { groupBy } from "es-toolkit";
-import { PlusIcon } from "lucide-react";
+import { useState } from "react";
 
-import { PaperCreateDialog } from "@/components/paper/CreateDialog/PaperCreateDialog";
-import { PaperYearSection } from "@/components/paper/PaperYearSection";
-import { ErrorView } from "@/components/shared/error-view";
-import { Button } from "@/components/ui/button";
-import { usePapers } from "@/hooks/paper/queries";
-import { useDialog } from "@/hooks/shared/use-dialog";
+import { PaperCreateForm } from "@/components/paper/CreateDialog/PaperCreateForm";
+import { PaperList } from "@/components/paper/PaperList";
+import { PaperUpdateForm } from "@/components/paper/UpdateDialog/PaperUpdateForm";
+import { Separator } from "@/components/ui/separator";
+import type { Paper } from "@/lib/schemas/paper/paper";
 
 export function PaperPage() {
-  const { data: papers = [], isError } = usePapers();
-  const { open, onOpenChange, closeDialog } = useDialog();
+  const [selectedId, setSelectedId] = useState<Paper["id"] | null>(null);
 
-  const groupedPapers = groupBy(papers, paper => paper.year);
-  const years = Object
-    .keys(groupedPapers)
-    .map(Number)
-    .sort((a, b) => b - a);
+  const handleSelectPaper = (paperId: Paper["id"]) => {
+    if (paperId === selectedId) return handleDeselect();
 
-  if (isError) {
-    return <ErrorView message="논문 정보를 불러오는데 실패했습니다." />;
-  }
+    setSelectedId(paperId);
+  };
+
+  const handleDeselect = () => {
+    setSelectedId(null);
+  };
 
   return (
-    <div className="space-y-8">
-      <div className="border-b pb-6">
-        <div className="flex justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground">
-              전체
-              {" "}
-              {Object.values(groupedPapers).flat().length}
-              개
-            </p>
-          </div>
-
-          <PaperCreateDialog
-            open={open}
-            onOpenChange={onOpenChange}
-            onCreated={closeDialog}
-          >
-            <Button>
-              <PlusIcon />
-            </Button>
-          </PaperCreateDialog>
-        </div>
+    <div className="flex h-full space-x-2">
+      <div className="w-3/5">
+        <PaperList
+          selectedPaperId={selectedId}
+          onSelectPaper={handleSelectPaper}
+        />
       </div>
-
-      <div className="space-y-8">
-        {years.map(year => (
-          <PaperYearSection
-            key={year}
-            year={year}
-            papers={groupedPapers[year]}
-          />
-        ))}
+      <Separator orientation="vertical" />
+      <div className="w-2/5">
+        {selectedId
+          ? (
+              <PaperUpdateForm
+                selectedPaperId={selectedId}
+                onDeleted={handleDeselect}
+              />
+            )
+          : (
+              <PaperCreateForm onSuccess={handleDeselect} />
+            )}
       </div>
     </div>
   );

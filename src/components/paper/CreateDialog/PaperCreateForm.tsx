@@ -53,15 +53,12 @@ export function PaperCreateForm({ onSuccess }: PaperCreateFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="h-full flex flex-col"
       >
-        <div className="flex-grow overflow-auto pr-2 mb-auto">
-          <PaperCreateFormFields form={form} />
-        </div>
-
-        <div className="flex-shrink-0 flex justify-end pt-2 border-t">
-          <Button type="submit" disabled={isPending || !isValid}>
+        <div className="flex justify-end mb-4">
+          <Button type="submit" disabled={isPending || !isValid} size="sm">
             {isPending ? <Spinner /> : "생성"}
           </Button>
         </div>
+        <PaperCreateFormFields form={form} />
       </form>
     </Form>
   );

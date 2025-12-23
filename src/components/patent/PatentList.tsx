@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { ProjectStatusIcon } from "@/components/project/ProjectStatusIcon";
+import { FileText } from "lucide-react";
+
 import { ErrorView } from "@/components/shared/error-view";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import {
@@ -11,41 +12,41 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useProjects } from "@/hooks/projects/queries";
-import { FILE_URL } from "@/lib/constants";
-import type { Project } from "@/lib/schemas/project/project";
+import { usePatents } from "@/hooks/patent/queries";
+import type { Patent } from "@/lib/schemas/patent/patent";
+import type { PatentPreview } from "@/lib/schemas/patent/patent-preview";
 import { cn } from "@/lib/utils";
 
-type ProjectListProps = {
-  selectedProject: Project | null;
-  onSelectProject: (project: Project) => void;
+type PatentListProps = {
+  selectedPatentId: Patent["id"] | null;
+  onSelectPatent: (patentId: Patent["id"]) => void;
 };
 
 const ITEMS_PER_PAGE = 5;
 
-export function ProjectList({
-  selectedProject,
-  onSelectProject,
-}: ProjectListProps) {
+export function PatentList({
+  selectedPatentId,
+  onSelectPatent,
+}: PatentListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const {
-    data: projects = [],
+    data: patents = [],
     isLoading,
     isError,
-  } = useProjects();
+  } = usePatents();
 
   if (isLoading) {
-    return <ProjectListSkeleton />;
+    return <PatentListSkeleton />;
   }
 
   if (isError) {
-    return <ErrorView message="프로젝트 목록을 불러오는 중 에러가 발생했습니다." />;
+    return <ErrorView message="특허 목록을 불러오는 중 에러가 발생했습니다." />;
   }
 
-  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(patents.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentProjects = projects.slice(startIndex, endIndex);
+  const currentPatents = patents.slice(startIndex, endIndex);
 
   const handlePreviousPage = () => {
     setCurrentPage(prev => Math.max(prev - 1, 1));
@@ -95,12 +96,12 @@ export function ProjectList({
         </PaginationContent>
       </Pagination>
       <div className="grid flex-1 grid-rows-5 gap-2 min-h-0">
-        {currentProjects.map(project => (
-          <ProjectListItem
-            key={project.id}
-            project={project}
-            onClick={() => onSelectProject(project)}
-            isSelected={selectedProject?.id === project.id}
+        {currentPatents.map(patent => (
+          <PatentListItem
+            key={patent.id}
+            patent={patent}
+            onClick={() => onSelectPatent(patent.id)}
+            isSelected={selectedPatentId === patent.id}
           />
         ))}
       </div>
@@ -108,7 +109,7 @@ export function ProjectList({
   );
 }
 
-function ProjectListSkeleton() {
+function PatentListSkeleton() {
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="flex justify-center p-2">
@@ -117,8 +118,8 @@ function ProjectListSkeleton() {
       <div className="grid flex-1 grid-rows-5 gap-2 min-h-0">
         {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
           <Item key={index} className="h-full p-2 gap-3 items-stretch animate-pulse" variant="outline">
-            <ItemMedia className="h-full w-auto aspect-square shrink-0 overflow-hidden rounded-md">
-              <Skeleton className="h-full w-full" />
+            <ItemMedia className="h-full w-auto aspect-square shrink-0 overflow-hidden rounded-md items-center justify-center flex">
+              <Skeleton className="h-1/2 w-1/2" />
             </ItemMedia>
             <Skeleton className="flex flex-col justify-start py-0.5 gap-1 min-w-0" />
           </Item>
@@ -128,13 +129,13 @@ function ProjectListSkeleton() {
   );
 }
 
-type ProjectListItemProps = {
+type PatentListItemProps = {
   onClick: () => void;
   isSelected: boolean;
-  project: Project;
+  patent: PatentPreview;
 };
 
-function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps) {
+function PatentListItem({ patent, isSelected, onClick }: PatentListItemProps) {
   return (
     <Item
       className={cn(
@@ -144,24 +145,19 @@ function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps)
       onClick={onClick}
       variant="outline"
     >
-      <ItemMedia className="h-full w-auto aspect-square shrink-0 overflow-hidden rounded-md">
-        <img
-          className="h-full w-full object-cover"
-          src={FILE_URL + project.thumbnail_url}
-          alt={`${project.name} Thumbnail`}
-        />
+      <ItemMedia className="h-full w-auto aspect-square shrink-0 overflow-hidden rounded-md items-center justify-center flex bg-secondary">
+        <FileText className="size-1/2 text-muted-foreground" />
       </ItemMedia>
-      <ItemContent className="flex flex-col justify-start gap-1 min-w-0">
-        <ItemTitle className="text-base font-semibold truncate">
-          <ProjectStatusIcon status={project.status} />
-          {project.name}
+      <ItemContent className="flex flex-col justify-start py-0.5 gap-1 min-w-0">
+        <ItemTitle className="text-base font-semibold leading-none truncate">
+          {patent.name}
         </ItemTitle>
         <div className="flex flex-col justify-between h-full">
           <ItemDescription className="line-clamp-2 text-sm text-muted-foreground break-keep">
-            {project.description}
+            {patent.link}
           </ItemDescription>
           <ItemDescription>
-            {project.year}
+            {patent.year}
             년
           </ItemDescription>
         </div>

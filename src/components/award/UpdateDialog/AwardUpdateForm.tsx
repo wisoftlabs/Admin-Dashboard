@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AwardUpdateFormFields } from "@/components/award/UpdateDialog/AwardUpdateFormFields";
 import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
+import { LoadingView } from "@/components/shared/LoadingView";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { useDeleteAward, useUpdateAward } from "@/hooks/award/mutations";
+import { useAward } from "@/hooks/award/queries";
 import { type Award } from "@/lib/schemas/award/award";
 import {
   type AwardUpdateFormData,
@@ -16,35 +18,38 @@ import {
 } from "@/lib/schemas/award/award-update-form-data";
 
 type AwardUpdateFormProps = {
-  award: Award;
+  selectedAwardId: Award["id"];
   onDeleted?: () => void;
-  onSuccess?: () => void;
 };
 
-export function AwardUpdateForm({ award, onDeleted, onSuccess }: AwardUpdateFormProps) {
+export function AwardUpdateForm({ selectedAwardId, onDeleted }: AwardUpdateFormProps) {
+  const { data: award, isLoading } = useAward(selectedAwardId);
+
   const form = useForm<AwardUpdateFormData>({
     resolver: zodResolver(AwardUpdateFormDataSchema),
     defaultValues: {
-      ...award,
+      year: 2025,
+      description: "",
+      title: "",
       image_file: undefined,
     },
   });
 
   const { isDirty, isValid } = form.formState;
-  const { mutate: updateAward, isPending } = useUpdateAward(award.id);
-  const { mutate: deleteAward } = useDeleteAward(award.id);
+  const { mutate: updateAward, isPending } = useUpdateAward(selectedAwardId);
+  const { mutate: deleteAward } = useDeleteAward(selectedAwardId);
 
   function handleDeleteAward() {
     deleteAward(undefined, { onSuccess: onDeleted });
   }
 
   useEffect(() => {
-    if (award)
+    if (selectedAwardId && award)
       form.reset({
         ...award,
         image_file: undefined,
       });
-  }, [award, form]);
+  }, [selectedAwardId, form, award]);
 
   const onSubmit = (data: AwardUpdateFormData) => {
     if (!isDirty) return;
@@ -54,10 +59,13 @@ export function AwardUpdateForm({ award, onDeleted, onSuccess }: AwardUpdateForm
           ...updatedAward,
           image_file: undefined,
         });
-        onSuccess?.();
       },
     });
   };
+
+  if (isLoading || !award) {
+    return <LoadingView />;
+  }
 
   return (
     <Form {...form}>
@@ -65,10 +73,7 @@ export function AwardUpdateForm({ award, onDeleted, onSuccess }: AwardUpdateForm
         onSubmit={form.handleSubmit(onSubmit)}
         className="h-full flex flex-col"
       >
-        <div className="flex-grow overflow-auto pr-2 mb-auto">
-          <AwardUpdateFormFields form={form} award={award} />
-        </div>
-        <div className="flex-shrink-0 flex justify-between pt-4 border-t">
+        <div className="flex justify-between mb-4">
           <ConfirmDialog title={`\`${award.title}\` 삭제`} onConfirm={handleDeleteAward}>
             <Button type="button" size="sm" variant="destructive">
               삭제
@@ -77,6 +82,9 @@ export function AwardUpdateForm({ award, onDeleted, onSuccess }: AwardUpdateForm
           <Button type="submit" disabled={!isDirty || !isValid || isPending} size="sm">
             {isPending ? <Spinner /> : "수정"}
           </Button>
+        </div>
+        <div className="flex-grow overflow-auto pr-2 mb-auto">
+          <AwardUpdateFormFields form={form} award={award} />
         </div>
       </form>
     </Form>

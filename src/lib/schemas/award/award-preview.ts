@@ -8,6 +8,7 @@ export const AwardPreviewSchema = AwardSchema.pick({
   image_url: true,
   orientation: true,
   title: true,
+  summary: true,
 });
 
 export type AwardPreview = z.infer<typeof AwardPreviewSchema>;

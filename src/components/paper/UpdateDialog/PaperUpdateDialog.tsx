@@ -56,7 +56,7 @@ export function PaperUpdateDialog({
             : paper
               ? (
                   <PaperUpdateForm
-                    selectedPaper={paper}
+                    selectedPaperId={paper}
                     onSuccess={onUpdated}
                     onDeleted={onDeleted}
                   />

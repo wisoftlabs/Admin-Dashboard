@@ -1,64 +1,44 @@
-import { groupBy } from "es-toolkit";
-import { PlusIcon } from "lucide-react";
+import { useState } from "react";
 
-import { PatentCreateDialog } from "@/components/patent/CreateDialog";
-import { PatentYearSection } from "@/components/patent/PatentYearSection";
-import { ErrorView } from "@/components/shared/error-view";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
-import { usePatents } from "@/hooks/patent/queries";
-import { useDialog } from "@/hooks/shared/use-dialog";
+import { PatentCreateForm } from "@/components/patent/CreateDialog/PatentCreateForm";
+import { PatentList } from "@/components/patent/PatentList";
+import { PatentUpdateForm } from "@/components/patent/UpdateDialog/PatentUpdateForm";
+import { Separator } from "@/components/ui/separator";
+import type { Patent } from "@/lib/schemas/patent/patent";
 
 export function PatentPage() {
-  const { open, onOpenChange, closeDialog } = useDialog();
-  const { data: patents = [], isLoading, isError } = usePatents();
+  const [selectedId, setSelectedId] = useState<Patent["id"] | null>(null);
 
-  if (isLoading) {
-    return (
-      <div className="flex h-full items-center justify-center">
-        <Spinner />
-      </div>
-    );
-  }
+  const handleSelectPatent = (patentId: Patent["id"]) => {
+    if (patentId === selectedId) return handleDeselect();
 
-  if (isError) {
-    return <ErrorView message="특허 정보를 불러오는데 실패했습니다." />;
-  }
+    setSelectedId(patentId);
+  };
 
-  const groupedPatents = groupBy(patents, patent => patent.year);
-  const years = Object.keys(groupedPatents)
-    .map(Number)
-    .sort((a, b) => b - a);
+  const handleDeselect = () => {
+    setSelectedId(null);
+  };
 
   return (
-    <div className="space-y-8">
-      <div className="border-b pb-6">
-        <div className="flex justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground">
-              전체
-              {" "}
-              {Object.values(groupedPatents).flat().length}
-              개
-            </p>
-          </div>
-
-          <PatentCreateDialog
-            open={open}
-            onOpenChange={onOpenChange}
-            onCreated={closeDialog}
-          >
-            <Button>
-              <PlusIcon />
-            </Button>
-          </PatentCreateDialog>
-        </div>
+    <div className="flex h-full space-x-2">
+      <div className="w-3/5">
+        <PatentList
+          selectedPatentId={selectedId}
+          onSelectPatent={handleSelectPatent}
+        />
       </div>
-
-      <div className="space-y-8">
-        {years.map(year => (
-          <PatentYearSection key={year} year={year} patents={groupedPatents[year]} />
-        ))}
+      <Separator orientation="vertical" />
+      <div className="w-2/5">
+        {selectedId
+          ? (
+              <PatentUpdateForm
+                selectedPatentId={selectedId}
+                onDeleted={handleDeselect}
+              />
+            )
+          : (
+              <PatentCreateForm onSuccess={handleDeselect} />
+            )}
       </div>
     </div>
   );

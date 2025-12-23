@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { PaperUpdateFormFields } from "@/components/paper/UpdateDialog/PaperUpdateFormFields";
 import { ConfirmDialog } from "@/components/shared/dialog/ConfirmDialog";
+import { LoadingView } from "@/components/shared/LoadingView";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { useDeletePaper, useUpdatePaper } from "@/hooks/paper/mutations";
+import { usePaper } from "@/hooks/paper/queries";
 import { type Paper } from "@/lib/schemas/paper/paper";
 import {
   type PaperUpdateFormData,
@@ -16,35 +18,43 @@ import {
 } from "@/lib/schemas/paper/paper-update-form-data";
 
 type PaperUpdateFormProps = {
-  selectedPaper: Paper;
+  selectedPaperId: Paper["id"];
   onDeleted?: () => void;
-  onSuccess?: () => void;
 };
 
-export function PaperUpdateForm({ selectedPaper, onDeleted, onSuccess }: PaperUpdateFormProps) {
+export function PaperUpdateForm({ selectedPaperId, onDeleted }: PaperUpdateFormProps) {
+  const { data: paper, isLoading } = usePaper(selectedPaperId);
+
   const form = useForm<PaperUpdateFormData>({
     resolver: zodResolver(PaperUpdateFormDataSchema),
     defaultValues: {
-      ...selectedPaper,
+      year: 2025,
+      authors: "",
+      journal: "",
+      paper_abstract: "",
+      title: "",
+      conference: "",
+      publication_date: new Date(),
+      link: "",
       image_file: undefined,
     },
   });
 
   const { isDirty, isValid } = form.formState;
-  const { mutate: updatePaper, isPending } = useUpdatePaper(selectedPaper.id);
-  const { mutate: deletePaper } = useDeletePaper(selectedPaper.id);
+  const { mutate: updatePaper, isPending } = useUpdatePaper(selectedPaperId);
+  const { mutate: deletePaper } = useDeletePaper(selectedPaperId);
 
   function handleDeletePaper() {
     deletePaper(undefined, { onSuccess: onDeleted });
   }
 
   useEffect(() => {
-    if (selectedPaper)
+    if (selectedPaperId && paper)
       form.reset({
-        ...selectedPaper,
+        ...paper,
         image_file: undefined,
       });
-  }, [selectedPaper, form]);
+  }, [selectedPaperId, form, paper]);
 
   const onSubmit = (data: PaperUpdateFormData) => {
     if (!isDirty) return;
@@ -54,10 +64,13 @@ export function PaperUpdateForm({ selectedPaper, onDeleted, onSuccess }: PaperUp
           ...updatedPaper,
           image_file: undefined,
         });
-        onSuccess?.();
       },
     });
   };
+
+  if (isLoading || !paper) {
+    return <LoadingView />;
+  }
 
   return (
     <Form {...form}>
@@ -65,11 +78,8 @@ export function PaperUpdateForm({ selectedPaper, onDeleted, onSuccess }: PaperUp
         onSubmit={form.handleSubmit(onSubmit)}
         className="h-full flex flex-col"
       >
-        <div className="flex-grow overflow-auto pr-2 mb-auto">
-          <PaperUpdateFormFields form={form} selectedPaper={selectedPaper} />
-        </div>
-        <div className="flex-shrink-0 flex justify-between pt-4 border-t">
-          <ConfirmDialog title={`\`${selectedPaper.title}\` 삭제`} onConfirm={handleDeletePaper}>
+        <div className="flex justify-between mb-4">
+          <ConfirmDialog title={`\`${paper.title}\` 삭제`} onConfirm={handleDeletePaper}>
             <Button type="button" size="sm" variant="destructive">
               삭제
             </Button>
@@ -77,6 +87,9 @@ export function PaperUpdateForm({ selectedPaper, onDeleted, onSuccess }: PaperUp
           <Button type="submit" disabled={!isDirty || !isValid || isPending} size="sm">
             {isPending ? <Spinner /> : "수정"}
           </Button>
+        </div>
+        <div className="flex-grow overflow-auto pr-2 mb-auto">
+          <PaperUpdateFormFields form={form} selectedPaper={paper} />
         </div>
       </form>
     </Form>

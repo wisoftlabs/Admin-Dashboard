@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { ProjectStatusIcon } from "@/components/project/ProjectStatusIcon";
 import { ErrorView } from "@/components/shared/error-view";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import {
@@ -11,41 +10,41 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useProjects } from "@/hooks/projects/queries";
+import { useAwards } from "@/hooks/award/queries";
 import { FILE_URL } from "@/lib/constants";
-import type { Project } from "@/lib/schemas/project/project";
+import type { Award, AwardPreview } from "@/lib/schemas/award/award";
 import { cn } from "@/lib/utils";
 
-type ProjectListProps = {
-  selectedProject: Project | null;
-  onSelectProject: (project: Project) => void;
+type AwardListProps = {
+  selectedAwardId: Award["id"] | null;
+  onSelectAward: (awardId: Award["id"]) => void;
 };
 
 const ITEMS_PER_PAGE = 5;
 
-export function ProjectList({
-  selectedProject,
-  onSelectProject,
-}: ProjectListProps) {
+export function AwardList({
+  selectedAwardId,
+  onSelectAward,
+}: AwardListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const {
-    data: projects = [],
+    data: awards = [],
     isLoading,
     isError,
-  } = useProjects();
+  } = useAwards();
 
   if (isLoading) {
-    return <ProjectListSkeleton />;
+    return <AwardListSkeleton />;
   }
 
   if (isError) {
-    return <ErrorView message="프로젝트 목록을 불러오는 중 에러가 발생했습니다." />;
+    return <ErrorView message="수상 목록을 불러오는 중 에러가 발생했습니다." />;
   }
 
-  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(awards.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentProjects = projects.slice(startIndex, endIndex);
+  const currentAwards = awards.slice(startIndex, endIndex);
 
   const handlePreviousPage = () => {
     setCurrentPage(prev => Math.max(prev - 1, 1));
@@ -95,12 +94,12 @@ export function ProjectList({
         </PaginationContent>
       </Pagination>
       <div className="grid flex-1 grid-rows-5 gap-2 min-h-0">
-        {currentProjects.map(project => (
-          <ProjectListItem
-            key={project.id}
-            project={project}
-            onClick={() => onSelectProject(project)}
-            isSelected={selectedProject?.id === project.id}
+        {currentAwards.map(award => (
+          <AwardListItem
+            key={award.id}
+            award={award}
+            onClick={() => onSelectAward(award.id)}
+            isSelected={selectedAwardId === award.id}
           />
         ))}
       </div>
@@ -108,7 +107,7 @@ export function ProjectList({
   );
 }
 
-function ProjectListSkeleton() {
+function AwardListSkeleton() {
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="flex justify-center p-2">
@@ -128,13 +127,13 @@ function ProjectListSkeleton() {
   );
 }
 
-type ProjectListItemProps = {
+type AwardListItemProps = {
   onClick: () => void;
   isSelected: boolean;
-  project: Project;
+  award: AwardPreview;
 };
 
-function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps) {
+function AwardListItem({ award, isSelected, onClick }: AwardListItemProps) {
   return (
     <Item
       className={cn(
@@ -147,21 +146,20 @@ function ProjectListItem({ project, isSelected, onClick }: ProjectListItemProps)
       <ItemMedia className="h-full w-auto aspect-square shrink-0 overflow-hidden rounded-md">
         <img
           className="h-full w-full object-cover"
-          src={FILE_URL + project.thumbnail_url}
-          alt={`${project.name} Thumbnail`}
+          src={FILE_URL + award.image_url}
+          alt={`${award.title} Thumbnail`}
         />
       </ItemMedia>
-      <ItemContent className="flex flex-col justify-start gap-1 min-w-0">
-        <ItemTitle className="text-base font-semibold truncate">
-          <ProjectStatusIcon status={project.status} />
-          {project.name}
+      <ItemContent className="flex flex-col justify-start py-0.5 gap-1 min-w-0">
+        <ItemTitle className="text-base font-semibold leading-none truncate">
+          {award.title}
         </ItemTitle>
         <div className="flex flex-col justify-between h-full">
           <ItemDescription className="line-clamp-2 text-sm text-muted-foreground break-keep">
-            {project.description}
+            {award.summary}
           </ItemDescription>
           <ItemDescription>
-            {project.year}
+            {award.year}
             년
           </ItemDescription>
         </div>
